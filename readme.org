@@ -22,11 +22,11 @@ A compléter avec la/les commande(s) à lancer.
 
 ** Members
 
-A compléter avec les membres du groupe.
+Yves Jordan NJAMEN, Stéphane WEMBE, Bernardo HUMMES FLORES, Yohann GOURRET, Katell LAGATTU
 
 
 ** Project Management
-The project in Taiga can be found [[https://tree.taiga.io/project/birromer-1-tennis-ball-collector/][here]].
+The project in Taiga can be found [[https://tree.taiga.io/project/birromer-1-tennis-ball-collector/timeline][here]].
 
 * Structure du dépôt
 This repository must be cloned inside the =src= directory of a ROS2 workspace.
