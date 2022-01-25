@@ -39,298 +39,257 @@
 (r*r)}" />
    </xacro:macro>
 
-   <material name="blue">
-     <color rgba="0 0 0.8 1"/>
-   </material>
+  <xacro:macro name="sphere_link" params="name r color mass:=0.1 inertia_ratio:=1.0 *origin">
+    <link name="${name}">
+        <collision>
+            <xacro:insert_block name="origin"/>
+            <geometry>
+                <sphere radius="${r}"/>
+            </geometry>
+        </collision>
+        <visual>
+            <xacro:insert_block name="origin"/>
+            <geometry>
+                <sphere radius="${r}"/>
+            </geometry>
+            <material name="${color}"/>
+        </visual>
+        <inertial>
+            <mass value="${mass}"/>
+            <xacro:insert_block name="origin"/>
+            <inertia ixx="${inertia_ratio*(2/3)*mass*r*r}" ixy="0.0" ixz="0.0"
+                     iyy="${inertia_ratio*(2/3)*mass*r*r}" iyz="0.0"
+                     izz="${inertia_ratio*(2/3)*mass*r*r}"/>
+        </inertial>
+    </link>
+    <joint name="${name}_joint" type="fixed">
+       <parent link="base_link"/>
+       <child link="${name}"/>
+       <xacro:insert_block name="origin"/>
+    </joint>
+  </xacro:macro>
 
-   <material name="red">
-     <color rgba="0.8 0 0 1"/>
-   </material>
+  <xacro:macro name="gripper_link" params="name l thickness h color mass:=0.1 inertia_ratio:=1.0 *origin">
+    <link name="${name}">
+        <collision>
+            <xacro:insert_block name="origin"/>
+            <geometry>
+              <box size="${l} ${thickness} ${h}"/>
+            </geometry>
+        </collision>
+        <visual>
+            <xacro:insert_block name="origin"/>
+            <geometry>
+              <box size="${l} ${thickness} ${h}"/>
+            </geometry>
+            <material name="${color}"/>
+        </visual>
+        <inertial>
+            <mass value="${mass}"/>
+            <xacro:insert_block name="origin"/>
+            <inertia ixx="${mass/12} * (${l}*${l})" ixy="0.0" ixz="0.0" iyy="${mass/12} * (${thickness}*${thickness})" iyz="0.0" izz="${mass/12}*(${thickness}*${thickness} + ${h}*${h})" />
+        </inertial>
+    </link>
+    <joint name="${name}_joint" type="fixed">
+       <parent link="base_link"/>
+       <child link="${name}"/>
+       <xacro:insert_block name="origin"/>
+    </joint>
+  </xacro:macro>
 
-   <material name="grey">
-     <color rgba="0.36 0.36 0.36 1"/>
-   </material>
+  <material name="blue">
+   <color rgba="0 0 0.8 1"/>
+  </material>
 
-   <material name="lightgrey">
-     <color rgba="0.76 0.76 0.76 1"/>
-   </material>
+  <material name="red">
+   <color rgba="0.8 0 0 1"/>
+  </material>
 
-   <material name="white">
-     <color rgba="1 1 1 1"/>
-   </material>
+  <material name="grey">
+   <color rgba="0.36 0.36 0.36 1"/>
+  </material>
 
-   <link name="base_link">
-     <visual>
-       <geometry>
-         <box size="${body_x} ${body_y} ${body_z}"/>
-       </geometry>
-       <material name="white"/>
-     </visual>
+  <material name="lightgrey">
+   <color rgba="0.76 0.76 0.76 1"/>
+  </material>
 
-     <collision>
-       <geometry>
-         <box size="${body_x} ${body_y} ${body_z}"/>
-       </geometry>
-     </collision>
+  <material name="white">
+   <color rgba="1 1 1 1"/>
+  </material>
 
-     <inertial>
-       <origin rpy="0 0 0" xyz="0 0 0.0"/>
-       <mass value="${body_m}"/>
-       <xacro:box_inertia m="${body_m}" w="${body_y}" h="${body_z}"
-d="${body_x}"/>
-     </inertial>
-   </link>
+  <material name="violet">
+   <color rgba="${127/255} ${0/255} 1 1"/>
+  </material>
 
-   <gazebo reference="base_link">
-     <material>Gazebo/White</material>
-   </gazebo>
+  <material name="green">
+   <color rgba="0 1 0 1"/>
+  </material>
 
-   <link name="wheel_right">
-     <visual>
-       <geometry>
-         <cylinder length="${wheel_len}" radius="${wheel_rad}"/>
-       </geometry>
-       <material name="lightgrey"/>
-     </visual>
+  <link name="base_link">
+   <visual>
+     <geometry>
+       <box size="${body_x} ${body_y} ${body_z}"/>
+     </geometry>
+     <material name="white"/>
+   </visual>
 
-     <collision>
-       <geometry>
-         <cylinder length="${wheel_len}" radius="${wheel_rad}"/>
-       </geometry>
-     </collision>
+   <collision>
+     <geometry>
+       <box size="${body_x} ${body_y} ${body_z}"/>
+     </geometry>
+   </collision>
 
-     <inertial>
-       <mass value="${wheel_m}"/>
-       <xacro:cylinder_inertia m="${wheel_m}" r="${wheel_rad}"
-h="${wheel_len}"/>
-     </inertial>
-   </link>
+   <inertial>
+     <origin rpy="0 0 0" xyz="0 0 0.0"/>
+     <mass value="${body_m}"/>
+     <xacro:box_inertia m="${body_m}" w="${body_y}" h="${body_z}"
+  d="${body_x}"/>
+   </inertial>
+  </link>
 
-   <gazebo reference="wheel_right">
-     <mu1>1.2</mu1>
-     <mu2>1.2</mu2>
-     <kp>500000.0</kp>
-     <kd>10.0</kd>
-     <minDepth>0.001</minDepth>
-     <maxVel>0.1</maxVel>
-     <material>Gazebo/GreyGradientSky</material>
-   </gazebo>
+  <gazebo reference="base_link">
+   <material>Gazebo/White</material>
+  </gazebo>
 
-   <joint name="wheel_right_joint" type="continuous">
-     <parent link="base_link"/>
-     <child link="wheel_right"/>
-     <axis xyz="0 0 1"/>
-     <origin rpy="${-pi/2} 0 0" xyz="${body_x*0.2} ${-body_y*0.65}
-${-body_y*0.25}"/>
-   </joint>
+  <link name="wheel_right">
+   <visual>
+     <geometry>
+       <cylinder length="${wheel_len}" radius="${wheel_rad}"/>
+     </geometry>
+     <material name="lightgrey"/>
+   </visual>
 
-   <link name="wheel_left">
-     <visual>
-       <geometry>
-         <cylinder length="${wheel_len}" radius="${wheel_rad}"/>
-       </geometry>
-       <material name="lightgrey"/>
-     </visual>
+   <collision>
+     <geometry>
+       <cylinder length="${wheel_len}" radius="${wheel_rad}"/>
+     </geometry>
+   </collision>
 
-     <collision>
-       <geometry>
-         <cylinder length="${wheel_len}" radius="${wheel_rad}"/>
-       </geometry>
-     </collision>
+   <inertial>
+     <mass value="${wheel_m}"/>
+     <xacro:cylinder_inertia m="${wheel_m}" r="${wheel_rad}"
+  h="${wheel_len}"/>
+   </inertial>
+  </link>
 
-     <inertial>
-       <mass value="${wheel_m}"/>
-       <xacro:cylinder_inertia m="${wheel_m}" r="${wheel_rad}"
-h="${wheel_len}"/>
-     </inertial>
-   </link>
+  <gazebo reference="wheel_right">
+   <mu1>1.2</mu1>
+   <mu2>1.2</mu2>
+   <kp>500000.0</kp>
+   <kd>10.0</kd>
+   <minDepth>0.001</minDepth>
+   <maxVel>0.1</maxVel>
+   <material>Gazebo/FlatBlack</material>
+  </gazebo>
 
-   <gazebo reference="wheel_left">
-     <mu1>1.2</mu1>
-     <mu2>1.2</mu2>
-     <kp>500000.0</kp>
-     <kd>10.0</kd>
-     <minDepth>0.001</minDepth>
-     <maxVel>0.1</maxVel>
-     <material>Gazebo/GreyGradientSky</material>
-   </gazebo>
+  <joint name="wheel_right_joint" type="continuous">
+   <parent link="base_link"/>
+   <child link="wheel_right"/>
+   <axis xyz="0 0 1"/>
+   <origin rpy="${-pi/2} 0 0" xyz="${body_x*0.2} ${-body_y*0.65}
+  ${-body_y*0.25}"/>
+  </joint>
 
-   <joint name="wheel_left_joint" type="continuous">
-     <parent link="base_link"/>
-     <child link="wheel_left"/>
-     <axis xyz="0 0 1"/>
-     <origin rpy="${-pi/2} 0 0" xyz="${body_x*0.2} ${body_y*0.65}
-${-body_y*0.25}"/>
-   </joint>
+  <link name="wheel_left">
+   <visual>
+     <geometry>
+       <cylinder length="${wheel_len}" radius="${wheel_rad}"/>
+     </geometry>
+     <material name="lightgrey"/>
+   </visual>
 
-   <link name="lidar">
-     <visual>
-       <geometry>
-         <cylinder length="${lidar_len}" radius="${lidar_rad}"/>
-       </geometry>
-       <material name="blue"/>
-     </visual>
+   <collision>
+     <geometry>
+       <cylinder length="${wheel_len}" radius="${wheel_rad}"/>
+     </geometry>
+   </collision>
 
-     <inertial>
-       <mass value="${lidar_m}"/>
-       <xacro:cylinder_inertia m="${lidar_m}" r="${lidar_rad}"
-h="${lidar_len}"/>
-     </inertial>
-   </link>
+   <inertial>
+     <mass value="${wheel_m}"/>
+     <xacro:cylinder_inertia m="${wheel_m}" r="${wheel_rad}"
+  h="${wheel_len}"/>
+   </inertial>
+  </link>
 
-   <gazebo reference="lidar">
-     <material>Gazebo/SkyBlue</material>
+  <gazebo reference="wheel_left">
+   <mu1>1.2</mu1>
+   <mu2>1.2</mu2>
+   <kp>500000.0</kp>
+   <kd>10.0</kd>
+   <minDepth>0.001</minDepth>
+   <maxVel>0.1</maxVel>
+   <material>Gazebo/FlatBlack</material>
+  </gazebo>
 
-     <!-- ray sensor -->
-     <sensor name="lidar_sensor" type="ray">
-       <ray>
-         <scan>
-           <horizontal>
-             <samples>360</samples>
-             <resolution>1</resolution>
-             <min_angle>0</min_angle>
-             <max_angle>6.28318530717958</max_angle>
-           </horizontal>
-           <vertical>
-             <samples>1</samples>
-             <resolution>1</resolution>
-             <min_angle>-0.0087</min_angle>
-             <max_angle>0.0087</max_angle>
-           </vertical>
-         </scan>
-         <range>
-           <min>0.1</min>
-           <max>10.0</max>
-         </range>
-       </ray>
+  <joint name="wheel_left_joint" type="continuous">
+   <parent link="base_link"/>
+   <child link="wheel_left"/>
+   <axis xyz="0 0 1"/>
+   <origin rpy="${-pi/2} 0 0" xyz="${body_x*0.2} ${body_y*0.65}
+  ${-body_y*0.25}"/>
+  </joint>
 
-       <always_on>true</always_on>
-       <update_rate>10.0</update_rate>
-       <visualize>true</visualize>
+  <link name="wheel_front">
+   <visual>
+     <geometry>
+       <sphere radius="${wheel_front_rad}"/>
+     </geometry>
+     <material name="grey"/>
+   </visual>
+   <collision>
+     <geometry>
+       <sphere radius="${wheel_front_rad}"/>
+     </geometry>
+   </collision>
+  </link>
+  <joint name="wheel_front_joint" type="fixed">
+   <parent link="base_link"/>
+   <child link="wheel_front"/>
+   <origin rpy="0 0 0" xyz="${-body_x*0.325} 0.0 ${-body_z*0.5}"/>
+  </joint>
 
-       <plugin filename="libgazebo_ros_ray_sensor.so" name="laserscan">
-         <ros>
-           <namespace>/ray</namespace>
-           <remapping>~/out:=laserscan</remapping>
-         </ros>
-         <output_type>sensor_msgs/LaserScan</output_type>
-         <frame_name>lidar</frame_name>
-       </plugin>
-     </sensor>
-   </gazebo>
+  <gazebo reference="wheel_front">
+   <material>Gazebo/DarkGray</material>
+   <mu1>0.2</mu1>
+   <mu2>0.2</mu2>
+  </gazebo>
 
-   <joint name="lidar_joint" type="fixed">
-     <parent link="base_link"/>
-     <child link="lidar"/>
-     <origin rpy="0 0 0" xyz="${-body_x*0.3} 0.0 ${body_z*0.75}"/>
-   </joint>
+  <gazebo>
+   <plugin filename="libgazebo_ros_diff_drive.so" name="diff_drive">
+     <!-- wheels -->
+     <left_joint>wheel_left_joint</left_joint>
+     <right_joint>wheel_right_joint</right_joint>
+     <!-- kinematics -->
+     <wheel_separation>${wheel_len + body_y}</wheel_separation>
+     <wheel_diameter>${2*wheel_rad}</wheel_diameter>
+     <!-- limits -->
+     <max_wheel_torque>20</max_wheel_torque>
+    <max_wheel_acceleration>1.0</max_wheel_acceleration>
+     <!-- output -->
+     <publish_odom>true</publish_odom>
+     <publish_odom_tf>true</publish_odom_tf>
+     <publish_wheel_tf>true</publish_wheel_tf>
+     <robot_base_frame>base_link</robot_base_frame>
+   </plugin>
+  </gazebo>
 
-   <link name="wheel_front">
-     <visual>
-       <geometry>
-         <sphere radius="${wheel_front_rad}"/>
-       </geometry>
-       <material name="grey"/>
-     </visual>
-     <collision>
-       <geometry>
-         <sphere radius="${wheel_front_rad}"/>
-       </geometry>
-     </collision>
+  <xacro:sphere_link name="green_head_sphere" color="green" r="0.05" mass="0.02" inertia_ratio="0.01">
+    <origin xyz="${-body_x*0.15} 0.0 ${body_z*0.25}" rpy="0 0 0"/>
+  </xacro:sphere_link>
+  <gazebo reference="green_head_sphere">
+    <material>Gazebo/Green</material>
+  </gazebo>
+  <xacro:sphere_link name="violet_head_sphere" color="violet" r="0.05" mass="0.02" inertia_ratio="0.01">
+    <origin xyz="${body_x*0.15} 0.0 ${body_z*0.25}" rpy="0 0 0"/>
+  </xacro:sphere_link>
+  <gazebo reference="violet_head_sphere">
+    <material>Gazebo/Purple</material>
+  </gazebo>
 
-   </link>
-
-   <joint name="wheel_front_joint" type="fixed">
-     <parent link="base_link"/>
-     <child link="wheel_front"/>
-     <origin rpy="0 0 0" xyz="${-body_x*0.325} 0.0 ${-body_z*0.5}"/>
-   </joint>
-
-   <gazebo reference="wheel_front">
-     <material>Gazebo/DarkGray</material>
-     <mu1>0.2</mu1>
-     <mu2>0.2</mu2>
-   </gazebo>
-
-   <gazebo>
-     <plugin filename="libgazebo_ros_diff_drive.so" name="diff_drive">
-       <!-- wheels -->
-       <left_joint>wheel_left_joint</left_joint>
-       <right_joint>wheel_right_joint</right_joint>
-       <!-- kinematics -->
-       <wheel_separation>${wheel_len + body_y}</wheel_separation>
-       <wheel_diameter>${2*wheel_rad}</wheel_diameter>
-       <!-- limits -->
-       <max_wheel_torque>20</max_wheel_torque>
-<max_wheel_acceleration>1.0</max_wheel_acceleration>
-       <!-- output -->
-       <publish_odom>true</publish_odom>
-       <publish_odom_tf>true</publish_odom_tf>
-       <publish_wheel_tf>true</publish_wheel_tf>
-       <robot_base_frame>base_link</robot_base_frame>
-     </plugin>
-   </gazebo>
-
-   <link name="camera">
-     <visual>
-       <geometry>
-         <sphere radius="${cam_rad}"/>
-       </geometry>
-       <material name="blue"/>
-     </visual>
-   </link>
-
-   <gazebo reference="camera">
-     <material>Gazebo/SkyBlue</material>
-   </gazebo>
-   &gt;
-
-   <joint name="camera_joint" type="fixed">
-     <parent link="base_link"/>
-     <child link="camera"/>
-     <origin rpy="0 0 0" xyz="${body_x*0.55} 0 0"/>
-   </joint>
-
-   <gazebo reference="camera">
-     <sensor name="front_camera" type="camera">
-       <always_on>true</always_on>
-       <update_rate>30.0</update_rate>
-       <visualize>true</visualize>
-
-       <camera name="front_camera">
-         <horizontal_fov>1.46608</horizontal_fov>
-
-         <image>
-           <width>640</width>
-           <height>480</height>
-           <format>R8G8B8</format>
-         </image>
-
-         <distortion>
-           <k1>0.0</k1>
-           <k2>0.0</k2>
-           <k3>0.0</k3>
-           <p1>0.0</p1>
-           <p2>0.0</p2>
-           <center>0.5 0.5</center>
-         </distortion>
-       </camera>
-
-       <plugin filename="libgazebo_ros_camera.so" name="plugin_camera">
-         <ros>
-           <namespace>/cam</namespace>
-           <remapping>~/image_raw:=image_raw</remapping>
-<remapping>~/camera_info:=camera_info</remapping>
-         </ros>
-
-         <camera_name>front_camera</camera_name>
-         <frame_name>camera</frame_name>
-         <hack_baseline>0.2</hack_baseline>
-       </plugin>
-     </sensor>
-
-     <material>Gazebo/Green</material>
-
-   </gazebo>
-
+  <xacro:gripper_link name="right_gripper" l="${body_x*0.70}" thickness="${body_y*0.05}" h="${body_z*0.5}"  color="grey" mass="0.1" inertia_ratio="0.01">
+    <origin xyz="${body_x*0.3} ${-body_y*0.1} ${-body_z*0.2}" rpy="0 0 ${-pi/8}"/>
+  </xacro:gripper_link>
+  <xacro:gripper_link name="left_gripper" l="${body_x*0.70}" thickness="${body_y*0.05}" h="${body_z*0.5}"  color="grey" mass="0.1" inertia_ratio="0.01">
+    <origin xyz="${body_x*0.3} ${body_y*0.1} ${-body_z*0.2}" rpy="0 0 ${pi/8}"/>
+  </xacro:gripper_link>
 </robot>
