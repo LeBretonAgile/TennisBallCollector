@@ -19,9 +19,11 @@ class WaypointNode(Node):
 
     def ball_callback(self, msg):
         balls_shape = msg.layout
-        print(balls_shape)
+        balls = msg.data
+#        print("layout:", balls_shape)
+#        print("data:", balls)
 
-        self.get_logger().info("Received message with shape " + str(balls_shape))
+        self.get_logger().info("Received message with layout: " + str(balls_shape) + "\and data:\n" + str(balls))
 
 
 def main():
