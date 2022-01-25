@@ -9,16 +9,19 @@ import imutils
 import numpy as np
 
 # modified from https://github.com/neka-nat/ros_np_multiarray/blob/master/src/ros_np_multiarray/ros_np_multiarray.py
-#def numpy_to_multiarray(arr, arr_type):
-#    multiarray = arr_type()
-#
-#    multiarray.layout.dim = [MultiArrayDimension() 'dim%d' % i,
-#                                                 arr.shape[i],
-#                                                 arr.shape[i] * arr.dtype.itemsize) for i in range(arr.ndim)]
-#
-#    multiarray.data = arr.reshape([1, -1])[0].tolist()
-#
-#    return multiarray
+def numpy_to_multiarray(arr, arr_type):
+    multiarray = arr_type()
+
+    multiarray.layout.dim = [MultiArrayDimension() for i in range(arr.ndim)]
+
+    for i in range(arr.ndim):
+        multiarray.layout.dim[i].size = arr.shape[i]
+        multiarray.layout.dim[i].stride = arr.shape[i] * arr.dtype.itemsize
+        multiarray.layout.dim[i].label = 'dim%d' % i
+
+    multiarray.data = arr.reshape([1, -1])[0].tolist()
+
+    return multiarray
 
 def detect_pos(frame,hsvLower=(23, 230,128), hsvUpper=(38,255, 142)): #hsvLower=(248, 130, 27), hsvUpper=(255, 140, 33)):
     blurred = cv2.GaussianBlur(frame, (3, 3), 0)
@@ -46,13 +49,13 @@ class MyNode(Node):
         self.cam_subscriber = self.create_subscription(Image,"/zenith_camera/image_raw",self.callback,30)
         self.balls = Float64MultiArray()
 
-    def callback(self,msg):
+    def callback(self, msg):
 
-        balls =[0.0, 1.0, 2.0, 3.0]
-        self.balls.data = balls
-#        self.balls.layout =
-
-#        self.balls = numpy_to_multiarray(balls, Float64MultiArray)
+        balls = np.array([
+            [0.0, 1.0],
+            [2.0, 3.0]
+        ])
+        self.balls = numpy_to_multiarray(balls, Float64MultiArray)
 
         self.ball_publisher.publish(self.balls)
         self.get_logger().info("Sent balls with shape:" + str(self.balls.layout))

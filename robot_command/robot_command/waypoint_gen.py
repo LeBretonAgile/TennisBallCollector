@@ -9,6 +9,21 @@ import cv2
 import imutils
 
 
+# modified from https://github.com/neka-nat/ros_np_multiarray/blob/master/src/ros_np_multiarray/ros_np_multiarray.py
+def numpy_to_multiarray(arr, arr_type):
+    multiarray = arr_type()
+
+    multiarray.layout.dim = [MultiArrayDimension() for i in range(arr.ndim)]
+
+    for i in range(arr.ndim):
+        multiarray.layout.dim[i].size = arr.shape[i]
+        multiarray.layout.dim[i].stride = arr.shape[i] * arr.dtype.itemsize
+        multiarray.layout.dim[i].label = 'dim%d' % i
+
+    multiarray.data = arr.reshape([1, -1])[0].tolist()
+
+    return multiarray
+
 class WaypointNode(Node):
     def __init__(self):
         super().__init__("camera_top")
