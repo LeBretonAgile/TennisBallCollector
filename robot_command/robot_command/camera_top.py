@@ -20,31 +20,30 @@ def detect_pos(frame,hsvLower=(23, 230,128), hsvUpper=(38,255, 142)): #hsvLower=
     
     centre = []
     for c in cnts:
-    	((x, y), radius) = cv2.minEnclosingCircle(c)
-    	centre.append([x,y])
+        ((x, y), radius) = cv2.minEnclosingCircle(c)
+        centre.append([x,y])
     return np.array(centre)
-	
+
 
 class MyNode(Node):
-	def __init__(self):
-		super().__init__("camera_top")
-		self.cmd_vel_publisher = self.create_publisher(Twist,"/cmd_vel",30)
-		self.str_subscriber = self.create_subscription(Image,"/zenith_camera/image_raw",self.callback,30)
-		self.twist = Twist()
-	
-	def callback(self,msg):
-		self.cmd_vel_publisher.publish(self.twist)
-		img = np.reshape(np.asarray(msg.data),(msg.height,msg.width,3))
-		Red = np.array(img[:,:,0])
-		img[:,:,0] = img[:,:,2]
-		img[:,:,2] = Red
-		pos = detect_pos(img)
-		self.get_logger().info("Received message !!! "+str(len(pos)))
-		
-	
+    def __init__(self):
+        super().__init__("camera_top")
+        self.cmd_vel_publisher = self.create_publisher(Twist,"/cmd_vel",30)
+        self.str_subscriber = self.create_subscription(Image,"/zenith_camera/image_raw",self.callback,30)
+        self.twist = Twist()
+
+    def callback(self,msg):
+        self.cmd_vel_publisher.publish(self.twist)
+        img = np.reshape(np.asarray(msg.data),(msg.height,msg.width,3))
+        Red = np.array(img[:,:,0])
+        img[:,:,0] = img[:,:,2]
+        img[:,:,2] = Red
+        pos = detect_pos(img)
+        self.get_logger().info("Received message !!! "+str(len(pos)))
+
+    
 
 def main():
-	rclpy.init()
-	node = MyNode()
-	rclpy.spin(node)
-	
+    rclpy.init()
+    node = MyNode()
+    rclpy.spin(node)
