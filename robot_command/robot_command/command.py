@@ -31,13 +31,13 @@ class Commande(Node):
 		yr = self.rob[0,1]
 		yb = self.ball[1]
 
-		if yr*yb >= 0:
-			thetp, v = self.control1()
-		else :
-			thetp, v = self.control2()
+		if yr*yb >= 0: #same side
+			thetp, v = self.rob_to_ball()
+		else : #has to avoid the net
+			thetp, v = self.rob_to_middle()
 		self.cmd_vel_pubisher.publish(Twist(Linear=Vector3(x=v), angular=Vector3(z=thetp))) 
 
-	def control1(self):
+	def rob_to_ball(self):
 		xd = self.ball[0]
 		yd = self.ball[1]
 
@@ -51,9 +51,9 @@ class Commande(Node):
 
 		return thetp, v
 
-	def control2(self):
+	def rob_to_middle(self):
 		
-		xd = 6.6 #proche du mur
+		xd = 6.6 #middle waypoint
 		yd = 0
 
 		xr = self.rob[0,0]
