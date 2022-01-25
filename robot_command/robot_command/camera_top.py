@@ -1,13 +1,27 @@
 import rclpy
 from rclpy.node import Node
 from geometry_msgs.msg import Twist, Vector3
-from std_msgs.msg import Float64, Float64MultiArray
+from std_msgs.msg import Float64, Float64MultiArray, MultiArrayDimension
 from sensor_msgs.msg import Image
 import cv2
 import imutils
 
 import numpy as np
 
+# modified from https://github.com/neka-nat/ros_np_multiarray/blob/master/src/ros_np_multiarray/ros_np_multiarray.py
+def numpy_to_multiarray(arr, arr_type):
+    multiarray = arr_type()
+
+    multiarray.layout.dim = [MultiArrayDimension() for i in range(arr.ndim)]
+
+    for i in range(arr.ndim):
+        multiarray.layout.dim[i].size = arr.shape[i]
+        multiarray.layout.dim[i].stride = arr.shape[i] * arr.dtype.itemsize
+        multiarray.layout.dim[i].label = 'dim%d' % i
+
+    multiarray.data = arr.reshape([1, -1])[0].tolist()
+
+    return multiarray
 
 def detect_pos(frame,hsvLower=(23, 230,128), hsvUpper=(38,255, 142)): #hsvLower=(248, 130, 27), hsvUpper=(255, 140, 33)):
     blurred = cv2.GaussianBlur(frame, (3, 3), 0)
@@ -79,10 +93,8 @@ class MyNode(Node):
 		self.ball_publisher.publish(self.balls)
 		self.get_logger().info("Received message !!! "+str(pos[0]))
 		
-	
 
 def main():
-	rclpy.init()
-	node = MyNode()
-	rclpy.spin(node)
-	
+    rclpy.init()
+    node = MyNode()
+    rclpy.spin(node)
