@@ -53,16 +53,16 @@ class Commande(Node):
 
 	def control2(self):
 		
-	    xd = 6.6 #proche du mur
-	    yd = 0
+		xd = 6.6 #proche du mur
+		yd = 0
 
-	    xr = self.rob[0,0]
-	    yr = self.rob[0,1]
-	    thetr = self.rob[1,2]
+		xr = self.rob[0,0]
+		yr = self.rob[0,1]
+		thetr = self.rob[1,2]
 
-	    thetd = arctan2(yd-yr, xd-xr)
-	    thetp = sawtooth(thetd - thetr)
-	    v = sqrt((yd-yr)**2 + (xd-xr)**2) * 0.01
+		thetd = arctan2(yd-yr, xd-xr)
+		thetp = sawtooth(thetd - thetr)
+		v = sqrt((yd-yr)**2 + (xd-xr)**2) * 0.01
 
 		return thetp, v
 
