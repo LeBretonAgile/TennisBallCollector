@@ -1,0 +1,17 @@
+#+TITLE: Debriefing for XX/XX/XXXX
+
+PO:
+
+* Review
+
+Percentage of accomplished tasks:
+
+** What worked
+
+** What did not work
+
+** PO experience
+
+** Advice for the next PO
+
+* New decisions

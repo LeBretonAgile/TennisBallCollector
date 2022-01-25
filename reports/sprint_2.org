@@ -1,0 +1,30 @@
+#+TITLE: Goals for 25/01/2022
+
+PO: Master Yohann Gourret
+
+* Expected functionalities
+- to have a working robot
+  - fully modeled
+  - working in the simulation
+
+- initial version of the control algorithm
+  - for searching 01 ball
+  - usage of potential fields method for avoiding obstacles
+
+- initial estimation from the camera
+  - balls and robot position
+  - robot orientation
+
+* Tasks for the day
+1. get the robot to spawn correctly in gazebo
+2. model clamp for catching the balls
+3. determine walls and obstacles positions
+4. track balls for determining position
+5. track robot orientation from distinguished elements on top
+6. determine algorithm for going to the balls
+7. implement initial control node communications
+
+* Technical challenges
+1. understand the new elements on how to use gazebo
+2. how to create an effective clamp for the ball
+3. guarantee working control algorithm
