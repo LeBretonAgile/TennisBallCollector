@@ -16,7 +16,6 @@ class Commande(Node):
 		
 		self.ball = np.array([0, 0, 0])
 		self.rob = np.array([[0, 0, 0],[0, 0, 0]])
-		self.point = 0
 
 	def ball_callback(self, msg):
 		self.get_logger().info(f"Received message : {msg}")
@@ -32,10 +31,11 @@ class Commande(Node):
 		yr = self.rob[0,1]
 		yb = self.ball[1]
 
-		if yr*yb > 0:
+		if yr*yb >= 0:
 			thetp, v = self.control1()
 		else :
 			thetp, v = self.control2()
+		self.cmd_vel_pubisher.publish(Twist(Linear=Vector3(x=v), angular=Vector3(z=thetp))) 
 
 	def control1(self):
 		xd = self.ball[0]
@@ -52,19 +52,17 @@ class Commande(Node):
 		return thetp, v
 
 	def control2(self):
-		if self.point
+		
+	    xd = 6.6 #proche du mur
+	    yd = 0
 
+	    xr = self.rob[0,0]
+	    yr = self.rob[0,1]
+	    thetr = self.rob[1,2]
 
-		xd = self.ball[0]
-		yd = self.ball[1]
-
-		xr = self.rob[0,0]
-		yr = self.rob[0,1]
-		thetr = self.rob[1,2]
-
-		thetd = arctan2(yd-yr, xd-xr)
-		thetp = sawtooth(thetd - thetr)
-		v = sqrt((yd-yr)**2 + (xd-xr)**2) * 0.01
+	    thetd = arctan2(yd-yr, xd-xr)
+	    thetp = sawtooth(thetd - thetr)
+	    v = sqrt((yd-yr)**2 + (xd-xr)**2) * 0.01
 
 		return thetp, v
 
