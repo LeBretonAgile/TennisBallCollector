@@ -1,0 +1,26 @@
+#+TITLE: Debriefing for 25/02/2022
+
+PO: Master Yohann Gourret
+
+* Review
+
+Percentage of accomplished tasks: 80%
+
+** What worked
+- The robot spawns correctly in the world and has a functional clamp, which succeeds in cleaning the balls when manually controlled.
+- The obstacle positions was found in the gazebo simulation and will be used for the control algorithm.
+- More communication nodes were established between the camera post-processing, the waypoint generation and the control. The multiarray structure was established correctly for sending the position of the balls.
+
+** What did not work
+- There still isn't the tracking of the balls or of the robot.
+- The orientation of the robot is not computed.
+- The path planning algorithm has not yet been tested to work.
+
+** PO experience
+
+
+** Advice for the next PO
+
+
+* New decisions
+We adapted the communication to use multiarrays. The division of nodes is clearer.
