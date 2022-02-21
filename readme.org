@@ -9,9 +9,28 @@ In order to run the simulation, you'll need to install the following dependencie
 - [[https://pypi.org/project/imutils/][imutils]]
 
 ** Run the simulation
+The execution works in two multiple separate parts.
 
-A compléter avec la/les commande(s) à lancer.
+
+The compilation and setup of the modules can be done as follows
 #+begin_src bash :tangle no :export code :results silent
+# build packages
+colcon build --symlink install
+
+# load variables
+. install/setup.sh
+#+end_src
+
+First we launch the simulation world in Gazebo. The robot is spawned in a node with its description and then the mission is launched.
+
+#+begin_src bash :tangle no :export code :results silent
+# launch the simulation world
+ros2 launch tennis_court tennis_court.launcher.py
+
+# launch the robot model
+ros2 launch robot_description display.launcher.py
+
+# launch the mission
 # TODO
 #+end_src
 
@@ -48,12 +67,14 @@ A very cool module.
 
 ** Top camera node
 *** Description:
-A very cool module.
+This node, camera_top , publish the positions and identifications for all balls with information of the camera.
 
 *** Communication:
 - Subscribers ::
+  - =/zenith_camera/image_raw= : Image
 
 - Publishers ::
+  - =/ball_list= : Float64MultiArray
 
 ** World model
 *** Description:
@@ -61,10 +82,8 @@ A very cool module.
 *** Communication:
 
 * Group
-
 ** Members
 Yves Jordan NJAMEN, Stéphane WEMBE, Bernardo HUMMES FLORES, Yohann GOURRET, Katell LAGATTU
-
 
 ** Project Management
 The project in Taiga can be found [[https://tree.taiga.io/project/birromer-1-tennis-ball-collector/timeline][here]].
@@ -79,15 +98,15 @@ Le dossier `tennis_court` est un package ROS contenant le monde dans lequel le r
 Ce package ne doit pas être modifié.
 Consulter le [README](tennis_court/README.md) du package pour plus d'informations.
 
+** `robot_description` package
+
+** `robot_command` package
 
 ** Documents
-
 Le dossier `docs` contient tous les documents utiles au projet:
 - Des [instructions pour utiliser Git](docs/GitWorkflow.md)
 - Un [Mémo pour ROS 2 et Gazebo](docs/Memo_ROS2.pdf)
 - Les [slides de la présentation Git](docs/GitPresentation.pdf)
 
-
 ** Rapports
-
 Le dossier `reports` doit être rempli avec les rapports d'[objectifs](../reports/GoalsTemplate.md) et de [rétrospectives](../reports/DebriefTemplate.md) en suivant les deux templates mis à disposition. Ces deux rapports doivent être rédigés respectivement au début et à la fin de chaque sprint.
