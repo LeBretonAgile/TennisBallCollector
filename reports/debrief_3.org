@@ -1,9 +1,30 @@
-#+TITLE: Goals for
+#+TITLE: Debriefing for 22/02/2022
 
-PO:
+PO: Chefe Bernardo Hummes Flores
 
-* Expected functionalities
+* Review
 
-* Tasks for the day
+Percentage of accomplished tasks: 70%
 
-* Technical challenges
+** What worked
+- The base documentation is done
+- The control and the command have been successfully merged
+- Waypoins are followed inside the court
+- Implemented detection of robot pose with camera
+- Fixed inertia of the robot
+
+** What did not work
+- The compass has not been added yet, need to finish in the next session
+- We need to respect the barriers inside the court with the control module
+- Modifications on the claw have no finished yet
+- It was not finished the image processing step to get the ball positions
+- All modules lack testing
+
+** PO experience
+It was a bit stressing the centering of the decisions, as some people seemed to rely a lot on the PO's external input on their work to continue. The division of the tasks seemed clear and no big problems were found, apart from the ball positions list task taking much longer than expected. Even with this, the tasks were redistributed with the available members.
+
+** Advice for the next PO
+Keep up with the members of the group throughout the session, so to make sure that everybody is aware of what to be done for progress to happen. Again, a thorough meeting at the beginning made it easier to know what was the situation and what was the next step in each of the smaller problems. Make people test stuff.
+
+* New decisions
+The heading will now be generated with a compass in the robot, instead of using two identifiable points on top of the robot model. That was a consequence of the time being taken to generate the lists of balls positions, as they were both part of the image processing tasks. The evolution of the model of the claw is being studied, as the ball slides through the side when turning. It seems ideal to continue the effort on the documentation as progress is made, so that it is easier for others to know what is being done by the whole team.

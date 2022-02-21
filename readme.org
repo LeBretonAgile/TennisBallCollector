@@ -30,8 +30,11 @@ ros2 launch tennis_court tennis_court.launcher.py
 # launch the robot model
 ros2 launch robot_description display.launcher.py
 
-# launch the mission
-# TODO
+# launch the top camera node
+ros2 launch robot_command camera_top
+
+# launch the control node, from what is perceived
+ros2 launch robot_command command
 #+end_src
 
 * Modules
