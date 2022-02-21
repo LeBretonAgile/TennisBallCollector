@@ -1,0 +1,9 @@
+#+TITLE: Goals for
+
+PO:
+
+* Expected functionalities
+
+* Tasks for the day
+
+* Technical challenges
