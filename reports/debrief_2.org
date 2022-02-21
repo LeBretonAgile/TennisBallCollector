@@ -1,4 +1,4 @@
-#+TITLE: Debriefing for 25/02/2022
+#+TITLE: Debriefing for 25/01/2022
 
 PO: Master Yohann Gourret
 
@@ -27,5 +27,6 @@ I was too involved in my code to properly follow their work.
 ** Advice for the next PO
 
 Start with a meeting, and follow the work of the team.
+
 * New decisions
 We adapted the communication to use multiarrays. The division of nodes is clearer.
