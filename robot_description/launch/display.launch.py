@@ -35,6 +35,7 @@ def generate_launch_description():
     gazebo_spawn_entity = Node(package='gazebo_ros', executable='spawn_entity.py',
                     arguments=['-topic', '/robot_description', '-entity', 'carlos', '-x', '1' , '-y', '1', '-z', '0', '-R', '0' ,'-P', '0' ,'-Y', '0'],
                     output='screen')
+
     rqt_control_node = Node(package='rqt_robot_steering', executable='rqt_robot_steering',
                     output='screen')
 

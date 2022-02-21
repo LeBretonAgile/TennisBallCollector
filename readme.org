@@ -15,7 +15,7 @@ The execution works in two multiple separate parts.
 The compilation and setup of the modules can be done as follows
 #+begin_src bash :tangle no :export code :results silent
 # build packages
-colcon build --symlink install
+colcon build --symlink-install
 
 # load variables
 . install/setup.sh
@@ -35,55 +35,44 @@ ros2 launch robot_description display.launcher.py
 #+end_src
 
 * Modules
-** Waypoint generation node
-*** Description:
-Generation of a waypoint for the robot at each instant, based on the known position of the balls.
 
-*** Communication:
-- Subscribers ::
-  - =/ball_list= : Float64MultiArray
+** Top camera
+Runs as =camera_top= node. This node publishes the positions and identifications for all balls with information of the camera.
 
-- Publishers ::
-  - =/waypoint= : Pose.
-
-** Example node
-*** Description:
-A very cool module.
-
-*** Communication:
-- Subscribers ::
-  - =/input_node_name= : type_of_the_message
-
-- Publishers ::
-  - =/output_node_name= : type_of_the_message
-
-** Control node
-*** Description: Robot command: it takes as input the position of the target and it computes the command
-
-*** Communication:
-- Subscribers :: "/posball" (type Pose) and "/posrob" (type Pose)
-
-- Publishers :: "/cmd_vel" (type Twist)
-
-** Top camera node
-*** Description:
-This node, camera_top , publish the positions and identifications for all balls with information of the camera.
-
-*** Communication:
 - Subscribers ::
   - =/zenith_camera/image_raw= : Image
 
 - Publishers ::
   - =/ball_list= : Float64MultiArray
 
-** World model
-*** Description:
+** Waypoint generation
+Runs as =waypoint_gen= node. Node responsible for the generation of a waypoint for the robot at each instant, based on the last known position of the balls.
+
+- Subscribers ::
+  - =/ball_list= : Float64MultiArray
+
+- Publishers ::
+  - =/waypoint= : Pose
+
+** Control node
+Run as =command= node. It takes as input the position of the target and it computes the action necessary to go to it.
+
+- Subscribers ::
+  - =/waypoint= : Pose
+  - =/robot_state= : Pose
+
+- Publishers ::
+
+** Robot description
+*** Description: The package =robot_description= describe the robot and all its sensors
 
 *** Communication:
+- Plugins ::
+  - =libgazebo_ros_diff_drive.so= : for wheel motion
 
 * Group
 ** Members
-Yves Jordan NJAMEN, Stéphane WEMBE, Bernardo HUMMES FLORES, Yohann GOURRET, Katell LAGATTU
+Yves Jordan NJAMEN, Stéphane NGNEPIEPAYE WEMBE, Bernardo HUMMES FLORES, Yohann GOURRET, Katell LAGATTU
 
 ** Project Management
 The project in Taiga can be found [[https://tree.taiga.io/project/birromer-1-tennis-ball-collector/timeline][here]].
