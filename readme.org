@@ -44,18 +44,7 @@ Generation of a waypoint for the robot at each instant, based on the known posit
   - =/ball_list= : Float64MultiArray
 
 - Publishers ::
-  - =/waypoint= : Pose.
-
-** Example node
-*** Description:
-A very cool module.
-
-*** Communication:
-- Subscribers ::
-  - =/input_node_name= : type_of_the_message
-
-- Publishers ::
-  - =/output_node_name= : type_of_the_message
+  - =/waypoint= : Pose
 
 ** Control node
 *** Description:
