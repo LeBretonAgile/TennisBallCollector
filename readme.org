@@ -55,15 +55,17 @@ A very cool module.
 
 - Publishers ::
 
-** World model
-*** Description:
+** Robot description
+*** Description: The package =robot_description= describe the robot and all its sensors
 
 *** Communication:
+- Plugins ::
+  - =libgazebo_ros_diff_drive.so= : for wheel motion
 
 * Group
 
 ** Members
-Yves Jordan NJAMEN, Stéphane WEMBE, Bernardo HUMMES FLORES, Yohann GOURRET, Katell LAGATTU
+Yves Jordan NJAMEN, Stéphane NGNEPIEPAYE WEMBE, Bernardo HUMMES FLORES, Yohann GOURRET, Katell LAGATTU
 
 
 ** Project Management
