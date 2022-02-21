@@ -20,6 +20,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
+<<<<<<< HEAD
 
         'camera_top = robot_command.camera_top:main',
         'command = robot_command.command:main'
@@ -27,6 +28,15 @@ setup(
            
         'waypoint = robot_command.waypoint_gen:main'
 
+=======
+<<<<<<< HEAD
+        'camera_top = robot_command.camera_top:main',
+        'command = robot_command.command:main'
+=======
+            'camera_top = robot_command.camera_top:main',
+            'waypoint = robot_command.waypoint_gen:main'
+>>>>>>> org/master
+>>>>>>> master
         ],
     },
 )
