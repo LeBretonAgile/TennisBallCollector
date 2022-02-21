@@ -70,7 +70,6 @@ Run as =command= node. It takes as input the position of the target and it compu
   - =/robot_state= : Pose
 
 - Publishers ::
-  - =/cmd_vel= : Twist
 
 * Group
 ** Members
