@@ -2,7 +2,6 @@
 
 Ceci est un template de dépôt Git pour le cours d'ingénierie système et modélisation robotique à l'ENSTA Bretagne en 2021.
 
-
 * Launch the simulation
 
 ** Requirements
@@ -16,6 +15,30 @@ A compléter avec la/les commande(s) à lancer.
 # TODO
 #+end_src
 
+* Modules
+** Waypoint generation node
+Generation of a waypoint for the robot at each instant, based on the known position of the balls.
+
+- Publishers:
+  - /waypoint:  Pose
+- Subscribers:
+  - /ball_list: Float64MultiArray
+
+** Control node
+- Input:
+- Output:
+
+** Top camera node
+- Input:
+- Output:
+
+** Robot node
+- Input:
+- Output:
+
+** World model
+- Input:
+- Output:
 
 * Group
 
