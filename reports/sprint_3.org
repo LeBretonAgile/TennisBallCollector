@@ -1,0 +1,30 @@
+#+TITLE: Goals for 21/02/2022
+
+PO: Chefe Bernado Hummes Flores
+
+* Expected functionalities
+- base documentation
+  - in order to integrate the different parts of the projects
+- working control algorithm
+  - integration with the simulation
+- detection and tracking of the balls
+  - detect each of the balls
+  - generate some base list of tracked positions
+  - some minimum version for testing
+- working waypoint generation
+- publish robot position and orientation
+
+* Tasks for the day
+1. write documentation template
+2. write documentation of each module
+3. integration control with world model
+4. validate control module
+5. identity ball positions
+6. identify robot position
+7. finish initial version of waypoint generation
+8. validate stability of robot
+
+* Technical challenges
+1. identify the margins of improvement
+2. integrate different modules in the same code
+3. validate working of each module
