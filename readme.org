@@ -36,18 +36,16 @@ ros2 launch robot_description display.launcher.py
 
 * Modules
 ** Waypoint generation node
-*** Description:
 Generation of a waypoint for the robot at each instant, based on the known position of the balls.
 
-*** Communication:
-- Subscribers ::
-  - =/ball_list= : Float64MultiArray
+- Communication:
+  - Subscribers ::
+    - =/ball_list= : Float64MultiArray
 
-- Publishers ::
-  - =/waypoint= : Pose
+  - Publishers ::
+    - =/waypoint= : Pose
 
 ** Control node
-*** Description:
 
 *** Communication:
 - Subscribers ::
@@ -55,15 +53,12 @@ Generation of a waypoint for the robot at each instant, based on the known posit
 - Publishers ::
 
 ** Top camera node
-*** Description:
-This node, camera_top , publish the positions and identifications for all balls with information of the camera.
+A very cool module.
 
 *** Communication:
 - Subscribers ::
-  - =/zenith_camera/image_raw= : Image
 
 - Publishers ::
-  - =/ball_list= : Float64MultiArray
 
 ** World model
 *** Description:
