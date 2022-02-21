@@ -26,7 +26,7 @@ def numpy_to_multiarray(arr, arr_type):
 
 class WaypointNode(Node):
     def __init__(self):
-        super().__init__("camera_top")
+        super().__init__("waypoint_gen")
         self.waypoint_publisher = self.create_publisher(Pose, "/waypoint", 30)
         self.ball_subscriber = self.create_subscription(Float64MultiArray, "/ball_list", self.ball_callback, 30)
         self.pose = Pose()
