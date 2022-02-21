@@ -36,7 +36,7 @@ ros2 launch robot_description display.launcher.py
 
 * Modules
 ** Robot description
-The package =robot_description= describe the robot and all its sensors
+The package =robot_description= describes the robot and all its sensors.
 
 - Plugins ::
   - =libgazebo_ros_diff_drive.so= : for wheel motion
@@ -51,13 +51,13 @@ Runs as =camera_top= node. This node publishes the positions and identifications
   - =/zenith_camera/image_raw= : Image
 
 - Publishers ::
-  - =/ball_list= : Float64MultiArray
+  - =/balls= : Float64MultiArray
 
 ** Waypoint generation
 Runs as =waypoint_gen= node. Node responsible for the generation of a waypoint for the robot at each instant, based on the last known position of the balls.
 
 - Subscribers ::
-  - =/ball_list= : Float64MultiArray
+  - =/balls= : Float64MultiArray
 
 - Publishers ::
   - =/waypoint= : Pose
