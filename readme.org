@@ -2,13 +2,11 @@
 
 Ceci est un template de dépôt Git pour le cours d'ingénierie système et modélisation robotique à l'ENSTA Bretagne en 2021.
 
-
 * Launch the simulation
 
 ** Requirements
-
- A compléter avec la/les dépendences.
-
+In order to run the simulation, you'll need to install the following dependencies:
+- [[https://pypi.org/project/imutils/][imutils]]
 
 ** Run the simulation
 
@@ -17,18 +15,61 @@ A compléter avec la/les commande(s) à lancer.
 # TODO
 #+end_src
 
+* Modules
+** Waypoint generation node
+*** Description:
+Generation of a waypoint for the robot at each instant, based on the known position of the balls.
+
+*** Communication:
+- Subscribers ::
+  - =/ball_list= : Float64MultiArray
+
+- Publishers ::
+  - =/waypoint= : Pose.
+
+** Example node
+*** Description:
+A very cool module.
+
+*** Communication:
+- Subscribers ::
+  - =/input_node_name= : type_of_the_message
+
+- Publishers ::
+  - =/output_node_name= : type_of_the_message
+
+** Control node
+*** Description:
+
+*** Communication:
+- Subscribers ::
+
+- Publishers ::
+
+** Top camera node
+*** Description:
+A very cool module.
+
+*** Communication:
+- Subscribers ::
+
+- Publishers ::
+
+** World model
+*** Description:
+
+*** Communication:
 
 * Group
 
 ** Members
-
 Yves Jordan NJAMEN, Stéphane WEMBE, Bernardo HUMMES FLORES, Yohann GOURRET, Katell LAGATTU
 
 
 ** Project Management
 The project in Taiga can be found [[https://tree.taiga.io/project/birromer-1-tennis-ball-collector/timeline][here]].
 
-* Structure du dépôt
+* Repository structure
 This repository must be cloned inside the =src= directory of a ROS2 workspace.
 
 ** `tennis_court` package
