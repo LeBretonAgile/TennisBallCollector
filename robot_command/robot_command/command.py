@@ -4,10 +4,10 @@ import time
 import numpy as np
 import rclpy
 from rclpy.node import Node
-from geometry_msgs.msg import Twist, Pose
+from geometry_msgs.msg import Twist, Pose, Vector3
 from robot_command.roblib import *
 
-class Commande(Node):
+class Command(Node):
 	def __init__(self):
 		super().__init__("command")
 		self.cmd_vel_publisher = self.create_publisher(Twist, "/cmd_vel", 10)
@@ -19,15 +19,17 @@ class Commande(Node):
 
 	def ball_callback(self, msg):
 		self.get_logger().info(f"Received message : {msg}")
-		self.ball[:] = msg.position
+		self.ball[0] = msg.position.x
+		self.ball[1] = msg.position.y
 
 	def rob_callback(self, msg):
 		self.get_logger().info(f"Received message : {msg}")
-		self.rob[0,:] = msg.position
+		self.rob[0,0] = msg.position.x
+		self.rob[0,1] = msg.position.y
 		
 		self.command()
 
-	def commande(self):
+	def command(self):
 		yr = self.rob[0,1]
 		yb = self.ball[1]
 
@@ -35,7 +37,7 @@ class Commande(Node):
 			thetp, v = self.rob_to_ball()
 		else : #has to avoid the net
 			thetp, v = self.rob_to_middle()
-		self.cmd_vel_pubisher.publish(Twist(Linear=Vector3(x=v), angular=Vector3(z=thetp))) 
+		self.cmd_vel_publisher.publish(Twist(linear=Vector3(x=v), angular=Vector3(z=thetp))) 
 
 	def rob_to_ball(self):
 		xd = self.ball[0]
@@ -76,7 +78,7 @@ class Commande(Node):
 
 def main(args=None):
 	rclpy.init(args=args)
-	node = Commande()
+	node = Command()
 	signal.signal(signal.SIGINT, node.shutdown)
 	rclpy.spin(node)
 	print("je passe ici")

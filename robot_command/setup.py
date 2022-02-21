@@ -21,7 +21,7 @@ setup(
     entry_points={
         'console_scripts': [
         'camera_top = robot_command.camera_top:main',
-        'command = robot_command.command:main'
+        'command = robot_command.command:main',
         'waypoint = robot_command.waypoint_gen:main'
         ],
     },
