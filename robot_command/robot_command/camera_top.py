@@ -57,20 +57,15 @@ class MyNode(Node):
 		self.nb = 0
 	
 	def linkage(self,pos):
-		etat = np.zeros((len(pos),2))
-		for i in range(len(pos)):
-			etat[i,0]=i
-			etat[i,1]=dist(pos[i],self.targets[i,:])
-		change = True
-		while change:
-			change = False
-			for i in range(len(etat)):
-				for k in range(10):
-					distance = dist(pos[i],self.targets[k])
-					if distance<etat[i,1] and best(etat,i,distance):
-						change = True
-						etat[i,1]=distance
-						etat[i,0]=k
+		Tab = np.zeros((10,len(pos)))
+		for i in range(10):
+			for j in range(len(pos)):
+				Tab[i,j] = dist(pos[i],self.targets[j])
+		Tab_1 = -np.ones((len(pos),10))
+		for i in range(len(pos)*len(pos)):
+			y = i%len(pos)
+			if np.sum(Tab_1,axis=1)==-10:
+				
 		for i in range(len(pos)):
 			self.targets[int(etat[i,0]),0] = pos[i,0]
 			self.targets[int(etat[i,0]),1] = pos[i,1]
