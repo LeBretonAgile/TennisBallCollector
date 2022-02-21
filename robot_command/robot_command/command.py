@@ -11,8 +11,8 @@ class Command(Node):
 	def __init__(self):
 		super().__init__("command")
 		self.cmd_vel_publisher = self.create_publisher(Twist, "/cmd_vel", 10)
-		self.posball_subscriber = self.create_subscription(Pose, "/posball", self.ball_callback, 10)
-		self.posrob_subscriber = self.create_subscription(Pose, "/posrob", self.rob_callback, 10)
+		self.posball_subscriber = self.create_subscription(Pose, "/waypoint", self.ball_callback, 10)
+		self.posrob_subscriber = self.create_subscription(Pose, "/robot_state", self.rob_callback, 10)
 		
 		self.ball = np.array([0, 0, 0])
 		self.rob = np.array([[0, 0, 0],[0, 0, 0]])
