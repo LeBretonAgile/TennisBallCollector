@@ -17,28 +17,48 @@ A compléter avec la/les commande(s) à lancer.
 
 * Modules
 ** Waypoint generation node
+*** Description:
 Generation of a waypoint for the robot at each instant, based on the known position of the balls.
 
-- Publishers ::
-  - =/waypoint= : Pose
+*** Communication:
 - Subscribers ::
   - =/ball_list= : Float64MultiArray
 
+- Publishers ::
+  - =/waypoint= : Pose.
+
+** Example node
+*** Description:
+A very cool module.
+
+*** Communication:
+- Subscribers ::
+  - =/input_node_name= : type_of_the_message
+
+- Publishers ::
+  - =/output_node_name= : type_of_the_message
+
 ** Control node
-- Input:
-- Output:
+*** Description:
+
+*** Communication:
+- Subscribers ::
+
+- Publishers ::
 
 ** Top camera node
-- Input:
-- Output:
+*** Description:
+A very cool module.
 
-** Robot node
-- Input:
-- Output:
+*** Communication:
+- Subscribers ::
+
+- Publishers ::
 
 ** World model
-- Input:
-- Output:
+*** Description:
+
+*** Communication:
 
 * Group
 
