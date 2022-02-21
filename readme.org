@@ -2,6 +2,8 @@
 
 Ceci est un template de dépôt Git pour le cours d'ingénierie système et modélisation robotique à l'ENSTA Bretagne en 2021.
 
+This is the repository used for the discipline of Ingènierie Système and robotic modeling at ENSTA Bretagne in 2021. Here, we create a robot capable cleaning the balls that appear in a tennis court, placing them in the designated places.
+
 * Launch the simulation
 
 ** Requirements
@@ -82,22 +84,22 @@ The project in Taiga can be found [[https://tree.taiga.io/project/birromer-1-ten
 * Repository structure
 This repository must be cloned inside the =src= directory of a ROS2 workspace.
 
-** `tennis_court` package
+** =tennis_court= package
 The folder =tennis_court= is a ROS package containing the world in which the ball cleaning ball.
 
 Le dossier `tennis_court` est un package ROS contenant le monde dans lequel le robot ramasseur de balle devra évoluer ainsi qu'un script permettant de faire apparaître des balles dans la simulation.
 Ce package ne doit pas être modifié.
 Consulter le [README](tennis_court/README.md) du package pour plus d'informations.
 
-** `robot_description` package
+** =robot_description= package
 
-** `robot_command` package
+** =robot_command= package
 
 ** Documents
-Le dossier `docs` contient tous les documents utiles au projet:
-- Des [instructions pour utiliser Git](docs/GitWorkflow.md)
-- Un [Mémo pour ROS 2 et Gazebo](docs/Memo_ROS2.pdf)
-- Les [slides de la présentation Git](docs/GitPresentation.pdf)
+The =docs= folder contains all of the useful documents for the project:
+- [[docs/GitWorkflow.md][Instructions on how to use Git]]
+- [[docs/Memo_ROS2.pdf][Reminders on how to use ROS2 and Gazebo]]
+- [[docs/GitPresentation.pdf][Slides of the Git presentation]]
 
-** Rapports
-Le dossier `reports` doit être rempli avec les rapports d'[objectifs](../reports/GoalsTemplate.md) et de [rétrospectives](../reports/DebriefTemplate.md) en suivant les deux templates mis à disposition. Ces deux rapports doivent être rédigés respectivement au début et à la fin de chaque sprint.
+** Reports
+The =reports= folder contains the notes taken for the meetings had at the beginning and end of each session. A template followed by the [[file:reports/sprint_template.org][sprint]] and [[file:reports/debrief_template.org][debriefing]] notes are found.
