@@ -19,10 +19,10 @@ A compléter avec la/les commande(s) à lancer.
 ** Waypoint generation node
 Generation of a waypoint for the robot at each instant, based on the known position of the balls.
 
-- Publishers:
-  - =/waypoint= ::  Pose
-- Subscribers:
-  - =/ball_list= :: Float64MultiArray
+- Publishers ::
+  - =/waypoint= : Pose
+- Subscribers ::
+  - =/ball_list= : Float64MultiArray
 
 ** Control node
 - Input:
