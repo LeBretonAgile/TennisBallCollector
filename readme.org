@@ -35,6 +35,14 @@ ros2 launch robot_description display.launcher.py
 #+end_src
 
 * Modules
+** Robot description
+The package =robot_description= describe the robot and all its sensors
+
+- Plugins ::
+  - =libgazebo_ros_diff_drive.so= : for wheel motion
+
+- Publishers ::
+  - =/cmd_vel= : Twist
 
 ** Top camera
 Runs as =camera_top= node. This node publishes the positions and identifications for all balls with information of the camera.
@@ -63,13 +71,6 @@ Run as =command= node. It takes as input the position of the target and it compu
 
 - Publishers ::
   - =/cmd_vel= : Twist
-
-** Robot description
-*** Description: The package =robot_description= describe the robot and all its sensors
-
-*** Communication:
-- Plugins ::
-  - =libgazebo_ros_diff_drive.so= : for wheel motion
 
 * Group
 ** Members
