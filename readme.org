@@ -35,6 +35,16 @@ ros2 launch robot_description display.launcher.py
 #+end_src
 
 * Modules
+
+** Top camera
+Runs as =camera_top= node. This node publishes the positions and identifications for all balls with information of the camera.
+
+- Subscribers ::
+  - =/zenith_camera/image_raw= : Image
+
+- Publishers ::
+  - =/ball_list= : Float64MultiArray
+
 ** Waypoint generation
 Runs as =waypoint_gen= node. Node responsible for the generation of a waypoint for the robot at each instant, based on the last known position of the balls.
 
@@ -45,19 +55,14 @@ Runs as =waypoint_gen= node. Node responsible for the generation of a waypoint f
   - =/waypoint= : Pose
 
 ** Control node
+Run as =command= node. It takes as input the position of the target and it computes the action necessary to go to it.
 
 - Subscribers ::
+  - =/waypoint= : Pose
+  - =/robot_state= : Pose
 
 - Publishers ::
-
-** Top camera
-Runs as =camera_top= node. This node publishes the positions and identifications for all balls with information of the camera.
-
-- Subscribers ::
-  - =/zenith_camera/image_raw= : Image
-
-- Publishers ::
-  - =/ball_list= : Float64MultiArray
+  - =/cmd_vel= : Twist
 
 ** World model
 *** Description:
