@@ -15,7 +15,7 @@ The execution works in two multiple separate parts.
 The compilation and setup of the modules can be done as follows
 #+begin_src bash :tangle no :export code :results silent
 # build packages
-colcon build --symlink install
+colcon build --symlink-install
 
 # load variables
 . install/setup.sh
@@ -35,30 +35,29 @@ ros2 launch robot_description display.launcher.py
 #+end_src
 
 * Modules
-** Waypoint generation node
-Generation of a waypoint for the robot at each instant, based on the known position of the balls.
+** Waypoint generation
+Runs as =waypoint_gen= node. Node responsible for the generation of a waypoint for the robot at each instant, based on the last known position of the balls.
 
-- Communication:
-  - Subscribers ::
-    - =/ball_list= : Float64MultiArray
+- Subscribers ::
+  - =/ball_list= : Float64MultiArray
 
-  - Publishers ::
-    - =/waypoint= : Pose
+- Publishers ::
+  - =/waypoint= : Pose
 
 ** Control node
 
-*** Communication:
 - Subscribers ::
 
 - Publishers ::
 
-** Top camera node
-A very cool module.
+** Top camera
+Runs as =camera_top= node. This node publishes the positions and identifications for all balls with information of the camera.
 
-*** Communication:
 - Subscribers ::
+  - =/zenith_camera/image_raw= : Image
 
 - Publishers ::
+  - =/ball_list= : Float64MultiArray
 
 ** World model
 *** Description:
