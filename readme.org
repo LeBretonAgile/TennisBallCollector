@@ -39,12 +39,12 @@ A very cool module.
   - =/output_node_name= : type_of_the_message
 
 ** Control node
-*** Description:
+*** Description: Robot command: it takes as input the position of the target and it computes the command
 
 *** Communication:
-- Subscribers ::
+- Subscribers :: "/posball" (type Pose) and "/posrob" (type Pose)
 
-- Publishers ::
+- Publishers :: "/cmd_vel" (type Twist)
 
 ** Top camera node
 *** Description:
