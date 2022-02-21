@@ -1,7 +1,5 @@
 #+TITLE: Tennis Ball Collector
 
-Ceci est un template de dépôt Git pour le cours d'ingénierie système et modélisation robotique à l'ENSTA Bretagne en 2021.
-
 This is the repository used for the discipline of Ingènierie Système and robotic modeling at ENSTA Bretagne in 2021. Here, we create a robot capable cleaning the balls that appear in a tennis court, placing them in the designated places.
 
 * Launch the simulation
