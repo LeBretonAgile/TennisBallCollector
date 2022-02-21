@@ -48,12 +48,14 @@ A very cool module.
 
 ** Top camera node
 *** Description:
-A very cool module.
+This node, camera_top , publish the positions and identifications for all balls with information of the camera.
 
 *** Communication:
 - Subscribers ::
+  - =/zenith_camera/image_raw= : Image
 
 - Publishers ::
+  - =/ball_list= : Float64MultiArray
 
 ** World model
 *** Description:
