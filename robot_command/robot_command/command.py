@@ -33,7 +33,7 @@ class Command(Node):
 		yr = self.rob[0,1]
 		yb = self.ball[1]
 
-		if yr*yb >= 0: #same side
+		if yr*yb >= 0 or abs(yr) < 0.2 : #same side
 			thetp, v = self.rob_to_ball()
 		else : #has to avoid the net
 			thetp, v = self.rob_to_middle()
