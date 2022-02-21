@@ -55,22 +55,23 @@ class MyNode(Node):
 			self.targets[i,0] = 100 + 100*i
 		self.balls=Float64MultiArray()
 		self.nb = 0
-		self.pos_rob = [0,0]
+		self.pos_rob = [0.,0.]
 	
 	def linkage(self,pos):
 		Tab = np.zeros((10,len(pos)))
 		for i in range(10):
 			for j in range(len(pos)):
-				Tab[i,j] = dist(pos[i],self.targets[j])
+				Tab[i,j] = dist(pos[j],self.targets[i])
 		identifier = -np.ones(len(pos))
 		compte = 0
 		while compte!=len(pos):
 			mini = np.min( Tab )
 			Id = np.where(Tab==mini)
-			if identifier[ Id[1][0] ]<-0.5:
+			if identifier[ Id[1][0] ]<-0.5 and len(np.where(identifier==Id[0][0])[0])==0:
 				compte+=1
 				identifier[ Id[1][0] ] = Id[0][0]
 			Tab[Id[0][0],Id[1][0]] = 10**6
+		print(identifier)
 		for i in range(len(pos)):
 			self.targets[int(identifier[i]),0] = pos[i,0]
 			self.targets[int(identifier[i]),1] = pos[i,1]
