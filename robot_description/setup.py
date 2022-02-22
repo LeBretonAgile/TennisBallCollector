@@ -24,6 +24,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
+        'driver_compass = robot_description.driver_compass:main'
         ],
     },
 )
