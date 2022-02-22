@@ -16,9 +16,9 @@
    <xacro:property name="cam_rad" value="0.04" />
    <xacro:property name="cam_m" value="0.01" />
 
-   <xacro:property name="lidar_len" value="0.08" />
+<!--    <xacro:property name="lidar_len" value="0.08" />
    <xacro:property name="lidar_rad" value="0.06" />
-   <xacro:property name="lidar_m" value="0.05" />
+   <xacro:property name="lidar_m" value="0.05" /> -->
 
     <!-- Define intertial property macros  -->
    <xacro:macro name="box_inertia" params="m w h d">
@@ -254,6 +254,7 @@
    <mu2>0.2</mu2>
   </gazebo>
 
+  <!-- ______________ wheel motion plugin _______________  -->
   <gazebo>
    <plugin filename="libgazebo_ros_diff_drive.so" name="diff_drive">
      <!-- wheels -->
@@ -273,6 +274,7 @@
    </plugin>
   </gazebo>
 
+   <!-- ______________ sphere orientation _______________  -->
   <xacro:sphere_link name="green_head_sphere" color="green" r="0.05" mass="0.02" inertia_ratio="0.01">
     <origin xyz="${-body_x*0.15} 0.0 ${body_z*0.25}" rpy="0 0 0"/>
   </xacro:sphere_link>
@@ -286,10 +288,30 @@
     <material>Gazebo/Purple</material>
   </gazebo>
 
-  <xacro:gripper_link name="right_gripper" l="${body_x*0.70}" thickness="${body_y*0.05}" h="${body_z*0.5}"  color="grey" mass="0.1" inertia_ratio="0.01">
+
+  <!-- ______________ adding grepper _______________  -->
+  <xacro:gripper_link name="right_gripper_1" l="${body_x*0.65}" thickness="${body_y*0.05}" h="${body_z*0.5}"  color="grey" mass="0.1" inertia_ratio="0.01">
     <origin xyz="${body_x*0.3} ${-body_y*0.1} ${-body_z*0.2}" rpy="0 0 ${-pi/8}"/>
   </xacro:gripper_link>
-  <xacro:gripper_link name="left_gripper" l="${body_x*0.70}" thickness="${body_y*0.05}" h="${body_z*0.5}"  color="grey" mass="0.1" inertia_ratio="0.01">
+  <xacro:gripper_link name="right_gripper_2" l="${body_x*0.15}" thickness="${body_y*0.05}" h="${body_z*0.5}"  color="grey" mass="0.1" inertia_ratio="0.01">
+    <origin xyz="${body_x*0.4*cos(pi/8)} ${-body_x*0.75*sin(pi/8)} ${-body_z*0.2}" rpy="0 0 ${pi/8}"/>
+  </xacro:gripper_link>
+  <xacro:gripper_link name="left_gripper_1" l="${body_x*0.65}" thickness="${body_y*0.05}" h="${body_z*0.5}"  color="grey" mass="0.1" inertia_ratio="0.01">
     <origin xyz="${body_x*0.3} ${body_y*0.1} ${-body_z*0.2}" rpy="0 0 ${pi/8}"/>
   </xacro:gripper_link>
+  <xacro:gripper_link name="left_gripper_2" l="${body_x*0.15}" thickness="${body_y*0.05}" h="${body_z*0.5}"  color="grey" mass="0.1" inertia_ratio="0.01">
+    <origin xyz="${body_x*0.4*cos(-pi/8)} ${-body_x*0.75*sin(-pi/8)} ${-body_z*0.2}" rpy="0 0 ${-pi/8}"/>
+  </xacro:gripper_link>
+
+  <!-- ______________ adding imu _______________  -->
+<!--   <gazebo>
+    <plugin name="imu_plugin" filename="libgazebo_ros_imu.so">
+      <alwaysOn>true</alwaysOn>
+      <bodyName>base_link</bodyName>
+      <topicName>imu</topicName>
+      <serviceName>imu_service</serviceName>
+      <gaussianNoise>0.0</gaussianNoise>
+      <updateRate>20.0</updateRate>
+    </plugin>
+  </gazebo> -->
 </robot>
