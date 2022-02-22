@@ -10,6 +10,7 @@ PO: Thibault Jadoul
   - Generate a message
  - Test the different components
  - State machine
+ - Working waypoint generation
  
 * Tasks for the day
  - Create the compass
@@ -18,8 +19,9 @@ PO: Thibault Jadoul
  - Adding temporality for the balls
  - Test the different components
  - Create documentation for the state machine
- - Create the state machine
+ - Implementation the state machine
+ - Upgrade the waitpoint
 
 * Technical challenges
- - implementation of the compass
- - continuous index for the balls
+ - Implementation of the compass
+ - Continuous index for the balls
