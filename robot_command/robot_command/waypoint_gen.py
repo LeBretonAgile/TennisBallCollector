@@ -34,25 +34,28 @@ class WaypointNode(Node):
     def __init__(self):
         super().__init__("waypoint_gen")
         self.waypoint_publisher = self.create_publisher(Pose, "/waypoint", 30)
-        self.ball_subscriber = self.create_subscription(Float64MultiArray, "/balls", self.ball_callback, 30)
+        self.ball_subscriber = self.create_subscription(Float64MultiArray, "/ball_list", self.ball_callback, 30)
         self.pose = Pose()
-        self.waypoint = Float64MultiArray()
+        self.waypoint = Pose()
 
     def ball_callback(self, msg):
-        balls = multiarray_to_numpy(msg, np.float64, np.float64)
-        print("balls shape:", balls.shape)
-        print("balls data:", balls)
+        balls = msg.data#multiarray_to_numpy(msg, np.float64, np.float64)
+        #print("balls shape:", balls.shape)
+        #print("balls data:", balls)
 
-        missing_balls = False
-        for ball in balls:
-            if ball[0] > 0 or ball[1] > 0:
-                missing_balls = True
-                ball_pos = ball
+        max_id = 0
+        for i in range(1,10):
+            if balls[20+i]>balls[20+max_id]:
+                max_id = i
+        if balls[max_id] == 0 :
+            self.waypoint.position.x = -100
+            self.waypoint.position.y = -100
+        else:
+            self.waypoint.position.x = balls[max_id*2]
+            self.waypoint.position.y = balls[max_id*2+1]
+        	
 
-        self.get_logger().info("Received message with layout: " + str(balls.shape) + "\and data:\n" + str(balls))
-
-        self.waypoint.data.position.x = ball_pos[0]
-        self.waypoint.data.position.y = ball_pos[1]
+        #self.get_logger().info("Received message with layout: " + str(balls.shape) + "\and data:\n" + str(balls))
 
         self.waypoint_publisher.publish(self.waypoint)
 
