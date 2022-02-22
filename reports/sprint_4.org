@@ -1,0 +1,22 @@
+ #+TITLE: Goals for 22/02/2022
+
+PO: Thibault Jadoul
+
+* Expected functionalities
+ - Image processing step to get the ball positions
+ - Adding temporality for the balls
+ - Compass
+  - Add compass to the robot
+  - Generate a message
+ - Test the different components
+ 
+* Tasks for the day
+ - Create the compass
+ - Generate the message for the compass
+ - Finish the image processing step to get the ball positions
+ - Adding temporality for the balls
+ - Test the different components
+
+* Technical challenges
+ - implementation of the compass
+ - continuous index for the balls
