@@ -26,6 +26,7 @@ class Command(Node):
 		self.ball[0] = msg.position.x
 		self.ball[1] = msg.position.y
 		if (not self.wait_in_corner) and (not self.go_to_corner):
+		    self.get_logger().info("STATE: GO TO BALL")
 		    self.go_to_ball = True
 
 	def rob_callback(self, msg):
@@ -43,6 +44,7 @@ class Command(Node):
 		if self.wait_in_corner:
 		    self.cmd_vel_publisher.publish(Twist(linear=Vector3(x=0), angular=Vector3(z=0)))
 		    if time.time()-self.t0>10: #si on a attendu assez longtemps
+		        self.get_logger().info("STATE: FINISHED")
 		        self.wait_in_corner = False
 		        
 		    
@@ -63,6 +65,7 @@ class Command(Node):
 		self.cmd_vel_publisher.publish(Twist(linear=Vector3(x=v), angular=Vector3(z=thetp))) 
 		
 		if sqrt((yb-yr)**2 + (xb-xr)**2) < 0.1: #if it is close to the ball, next state
+		    self.get_logger().info("STATE: CLOSE TO BALL, NOW LET'S GO TO THE CORNER")
 		    self.go_to_ball = False
 		    self.go_to_corner = True #next state: go to corner
 
@@ -108,6 +111,7 @@ class Command(Node):
 		    target_y = yc2
 		self.rob_to_target(target_x, target_y)
 		if sqrt((target_y-yr)**2 + (target_x-xr)**2) < 0.1: #if it is close to the corner, next state
+		    self.get_logger().info("STATE: CLOSE TO CORNER, NOW WAIT")
 		    self.go_to_corner = False
 		    self.wait_in_corner = True #next state: waits that the ball disappears
 		    self.t0 = time.time()
