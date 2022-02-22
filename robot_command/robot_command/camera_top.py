@@ -55,19 +55,19 @@ class MyNode(Node):
 			self.targets[i,0] = 100 + 100*i
 		self.balls=Float64MultiArray()
 		self.nb = 0
-		self.pos_rob = [0,0]
+		self.pos_rob = [0.,0.]
 	
 	def linkage(self,pos):
 		Tab = np.zeros((10,len(pos)))
 		for i in range(10):
 			for j in range(len(pos)):
-				Tab[i,j] = dist(pos[i],self.targets[j])
+				Tab[i,j] = dist(pos[j],self.targets[i])
 		identifier = -np.ones(len(pos))
 		compte = 0
 		while compte!=len(pos):
 			mini = np.min( Tab )
 			Id = np.where(Tab==mini)
-			if identifier[ Id[1][0] ]<-0.5:
+			if identifier[ Id[1][0] ]<-0.5 and len(np.where(identifier==Id[0][0])[0])==0:
 				compte+=1
 				identifier[ Id[1][0] ] = Id[0][0]
 			Tab[Id[0][0],Id[1][0]] = 10**6
@@ -87,29 +87,22 @@ class MyNode(Node):
 		pos = detect_pos(hsv)
 		front_robot = detect_pos(hsv,hsvLower=(145, 245,130), hsvUpper=(155,255, 140))
 		back_robot = detect_pos(hsv,hsvLower=(55, 245,125), hsvUpper=(135,255, 142))
-		print("Taille pos : ",len(pos))
-		print("Nb av : ",len(front_robot))
-		print("Nb ar : ",len(back_robot),"\n")
 		if (len(front_robot)==1 and len(back_robot)==1):
 			self.pos_rob = [ (front_robot[0][0]+back_robot[0][0])*0.5 , (front_robot[0][1]+back_robot[0][1])*0.5 ]
 		if len(pos)<=10:
 			self.linkage(pos)
 		
-		print(self.targets)
 		if True:
 			fact = 8.0*np.tan( 2.2 *0.5)/(0.5*img.shape[1])
-			"""
+			
 			for i in range(10):
-				print(self.targets[i,1]/fact," ",self.targets[i,0]/fact)
-				print(img.shape[0]*0.5," ",img.shape[1]*0.5)
-				x = int( -self.targets[i,1]/fact + img.shape[0]*0.5 )
-				y = int( -self.targets[i,0]/fact + img.shape[1]*0.5 )
-				print(x," ",y)
-				cv2.putText(img,str(i),(x,y),cv2.FONT_HERSHEY_SIMPLEX,1,(255,0,0),2,cv2.LINE_4)
-			"""
-			x = int( -self.pos_rob[1]/fact + img.shape[0]*0.5 )
-			y = int( -self.pos_rob[0]/fact + img.shape[1]*0.5 )
-			img = cv2.circle(img, (y,x), 5, (255,255,255), 2)
+				x = int( -self.targets[i,1]/fact + img.shape[1]*0.5 )
+				y = int( -self.targets[i,0]/fact + img.shape[0]*0.5 )
+				cv2.putText(img,str(i),(x,y),cv2.FONT_HERSHEY_SIMPLEX,1,(0,0,255),2,cv2.LINE_4)
+			
+			x = int( -self.pos_rob[1]/fact + img.shape[1]*0.5 )
+			y = int( -self.pos_rob[0]/fact + img.shape[0]*0.5 )
+			img = cv2.circle(img, (x,y), 5, (255,255,255), 2)
 		cv2.imshow("image", img)
 		cv2.waitKey(1)
 		
