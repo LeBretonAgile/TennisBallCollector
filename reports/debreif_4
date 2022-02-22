@@ -1,0 +1,28 @@
+#+TITLE: Debriefing for 22/02/2022
+
+PO: Thibault Jadoul
+
+* Review
+
+Percentage of accomplished tasks: %
+
+** What worked
+ - Compass
+ - Temporality ball
+ - Image processing step to get the ball positions
+ - Working waypoint generation
+
+** What did not work
+ - Intégration of compass
+ - State machine
+ - Command to be redone
+
+** PO experience
+ It's very instructive, but you need to have management skills.
+
+** Advice for the next PO
+ Nothing except what others have already said.
+
+* New decisions
+ Improved clamp
+ Improved command
