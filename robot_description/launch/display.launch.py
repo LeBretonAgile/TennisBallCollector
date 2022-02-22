@@ -39,12 +39,16 @@ def generate_launch_description():
     rqt_control_node = Node(package='rqt_robot_steering', executable='rqt_robot_steering',
                     output='screen')
 
+    driver_compass_node = Node(package='robot_description', executable='driver_compass',
+                    output='screen')
+
     return LaunchDescription([
         robot_state_publisher_node,
         joint_state_publisher_gui_node,
         gazebo_spawn_entity,
         rqt_control_node,
-        rviz_node
+        rviz_node,
+        driver_compass_node
     ])
 
 
