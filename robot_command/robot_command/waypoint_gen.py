@@ -55,7 +55,7 @@ class WaypointNode(Node):
             self.waypoint.position.y = balls[max_id*2+1]
         	
 
-        #self.get_logger().info("Received message with layout: " + str(balls.shape) + "\and data:\n" + str(balls))
+        self.get_logger().info("Received message with layout, size : " + str(len(balls)))
 
         self.waypoint_publisher.publish(self.waypoint)
 
