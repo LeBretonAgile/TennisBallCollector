@@ -38,18 +38,18 @@ class Command(Node):
 		if self.go_to_ball:
 		    self.command_ball()
 		    
-		if self.go_to_corner:
+		elif self.go_to_corner:
 		    self.command_corner()
 		    
-		if self.wait_in_corner:
-		    self.cmd_vel_publisher.publish(Twist(linear=Vector3(x=0), angular=Vector3(z=0)))
+		elif self.wait_in_corner:
+		    self.cmd_vel_publisher.publish(Twist(linear=Vector3(x=0.), angular=Vector3(z=0.)))
 		    if time.time()-self.t0>10: #si on a attendu assez longtemps
 		        self.get_logger().info("STATE: FINISHED")
 		        self.wait_in_corner = False
 		        
 		    
 		else: #robot waits
-		    self.cmd_vel_publisher.publish(Twist(linear=Vector3(x=0), angular=Vector3(z=0))) 
+		    self.cmd_vel_publisher.publish(Twist(linear=Vector3(x=0.), angular=Vector3(z=0.))) 
 
 	def command_ball(self):
 		xr = self.rob[0,0]
@@ -61,10 +61,10 @@ class Command(Node):
 			thetp, v = self.rob_to_target(xb, yb)
 		else : #has to avoid the net
 			thetp, v = self.rob_to_middle()
-		    
+		self.get_logger().info("v---"+str(v)+"---thetp"+str(thetp))
 		self.cmd_vel_publisher.publish(Twist(linear=Vector3(x=v), angular=Vector3(z=thetp))) 
 		
-		if sqrt((yb-yr)**2 + (xb-xr)**2) < 0.1: #if it is close to the ball, next state
+		if sqrt((yb-yr)**2 + (xb-xr)**2) < 0.3: #if it is close to the ball, next state
 		    self.get_logger().info("STATE: CLOSE TO BALL, NOW LET'S GO TO THE CORNER")
 		    self.go_to_ball = False
 		    self.go_to_corner = True #next state: go to corner
