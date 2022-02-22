@@ -33,9 +33,14 @@ ros2 launch robot_description display.launcher.py
 # launch the top camera node
 ros2 launch robot_command camera_top
 
-# launch the control node, from what is perceived
+# launch the control node
 ros2 launch robot_command command
 #+end_src
+
+** State representation
+The execution of the algorithm implements the following behavior for dealing with the balls.
+#+attr_html: :width 700
+[[file:docs/states.png]]
 
 * Modules
 ** Robot description
