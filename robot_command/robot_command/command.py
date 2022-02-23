@@ -28,7 +28,7 @@ class Command(Node):
 		self.etat = "WAIT"
 		self.side = 1.
 	
-	def move_to(self,target,pograde=True):
+	def move_to(self,target,frein=True):
 		vect = target-self.rob
 		vect[2]=0.
 		dist = np.linalg.norm(vect)
@@ -38,11 +38,13 @@ class Command(Node):
 			orient *= -1
 		delta_angle = sawtooth(orient-self.rob[2])
 		v=1.
-		if dist<1.5:
-			v=0.25+0.75*dist/1.5
 		thetp = 1.5* delta_angle
+		if dist<2. and frein:
+			v=0.05+0.95*dist/2.
+		#v *= (1.-delta_angle/np.pi)
 		if abs(delta_angle)>np.pi*0.25:
 			v=0.
+			thetp /= abs(thetp)*1.5
 		self.cmd_vel_publisher.publish(Twist(linear=Vector3(x=v), angular=Vector3(z=thetp)))
 		return dist
 
@@ -67,8 +69,6 @@ class Command(Node):
 			self.etat_GO_TO_CORNER_1()
 		elif self.etat == "GO_TO_CORNER_2":
 			self.etat_GO_TO_CORNER_2()
-		elif self.etat == "GO_TO_CORNER_1_5":
-			self.etat_GO_TO_CORNER_1_5()
 		elif self.etat == "GO_TO_CORNER_3":
 			self.etat_GO_TO_CORNER_3()
 	
@@ -85,18 +85,18 @@ class Command(Node):
 				self.etat = "GO_BALL"
 	
 	def etat_CHANGE_SIDE_UP_1(self):
-		dist = self.move_to(np.array([7.,self.side*1.1,0]))
+		dist = self.move_to(np.array([7.,self.side*1.1,0]),False)
 		if dist<0.2:
 			self.etat = "CHANGE_SIDE_UP_2"
 	
 	def etat_CHANGE_SIDE_UP_2(self):
-		dist = self.move_to(np.array([7.,-self.side*1.1,0]))
+		dist = self.move_to(np.array([7.,-self.side*1.1,0]),False)
 		if dist<0.2:
 			self.etat = "GO_BALL"
 	
 	def etat_GO_BALL(self):
 		dist = self.move_to(self.ball)
-		if dist<=0.6:
+		if dist<=0.5:
 			self.etat = "GO_TO_CORNER_1"
 			if self.rob[1]>0:
 				self.side = 1
@@ -105,22 +105,17 @@ class Command(Node):
 		
 	
 	def etat_GO_TO_CORNER_1(self):
-		dist = self.move_to(np.array([self.side*3.5,self.side*10.1,0]))
+		dist = self.move_to(np.array([self.side*3.5,self.side*10.1,0]),False)
 		if dist<=1.:
-			self.etat="GO_TO_CORNER_1_5"
-	
-	def etat_GO_TO_CORNER_1_5(self):
-		dist = self.move_to(np.array([self.side*5.,self.side*(13.1-1.5),0]))
-		if dist<=0.4:
 			self.etat="GO_TO_CORNER_2"
 	
 	def etat_GO_TO_CORNER_2(self):
-		dist = self.move_to(np.array([self.side*6.5,self.side*13.1,0]))
+		dist = self.move_to(np.array([self.side*6.5,self.side*13.1,0]),False)
 		if dist<=0.3:
 			self.etat="GO_TO_CORNER_3"
 	
 	def etat_GO_TO_CORNER_3(self):
-		dist = self.move_to(np.array([self.side*3.5,self.side*10.1,0]))
+		dist = self.move_to(np.array([self.side*3.5,self.side*10.1,0]),False)
 		if dist<=1.:
 			self.etat="WAIT"
 	
