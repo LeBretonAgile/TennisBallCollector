@@ -96,13 +96,13 @@ This repository must be cloned inside the =src= directory of a ROS2 workspace.
 ** =tennis_court= package
 The folder =tennis_court= is a ROS package containing the world in which the ball cleaning ball.
 
-Le dossier `tennis_court` est un package ROS contenant le monde dans lequel le robot ramasseur de balle devra évoluer ainsi qu'un script permettant de faire apparaître des balles dans la simulation.
+Le dossier =tennis_court= est un package ROS contenant le monde dans lequel le robot ramasseur de balle devra évoluer ainsi qu'un script permettant de faire apparaître des balles dans la simulation.
 Ce package ne doit pas être modifié.
 Consulter le [README](tennis_court/README.md) du package pour plus d'informations.
 
 ** =robot_description= package
 
-The `robot_description` directory is a ROS package that contains the description of the robot. This package allows to describe the different parts and joints of the robot in the file `/urdf/robot.urdf.xacro`. It also contains the definition of the robot's IMU. 
+The =robot_description= directory is a ROS package that contains the description of the robot. This package allows to describe the different parts and joints of the robot in the file =/urdf/robot.urdf.xacro=. It also contains the definition of the robot's IMU. 
 
 ** =robot_command= package
 The `robot_description` folder is an ROS package containing all the control scripts, here they are:
