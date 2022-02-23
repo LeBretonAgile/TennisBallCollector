@@ -4,19 +4,20 @@ PO: Yves Jordan NJAMEN N.
 
 * Review
 
-Percentage of accomplished tasks: %
+Percentage of accomplished tasks: 90%
 
 ** What worked
-- 
+- Robot can collect all balls
+- PPT for presentation is done
 
 ** What did not work
-- 
+- Nothing
 
 ** PO experience
-
+It was a good experience but need to improve managment skills 
 
 ** Advice for the next PO
-
+Nothing
 
 * New decisions
-- 
+- Command and FSM
