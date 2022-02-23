@@ -98,8 +98,8 @@ class MyNode(Node):
 		hsv = cv2.cvtColor(blurred, cv2.COLOR_BGR2HSV)
 		
 		pos = detect_pos(hsv)
-		front_robot = detect_pos(hsv,0.4,hsvLower=(145, 245,130), hsvUpper=(155,255, 140))
-		back_robot = detect_pos(hsv,0.4,hsvLower=(55, 245,125), hsvUpper=(135,255, 142))
+		front_robot = detect_pos(hsv,0.4,hsvLower=(145, 240,125), hsvUpper=(160,255, 145))
+		back_robot = detect_pos(hsv,0.4,hsvLower=(50, 240,120), hsvUpper=(140,255, 145))
 		if (len(front_robot)==1 and len(back_robot)==1):
 			self.pos_rob = [ (front_robot[0][0]+back_robot[0][0])*0.5 , (front_robot[0][1]+back_robot[0][1])*0.5 ]
 			direction = np.array([front_robot[0][0]-back_robot[0][0],front_robot[0][1]-back_robot[0][1]])
