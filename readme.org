@@ -37,7 +37,7 @@ ros2 run robot_command camera_top
 ros2 run robot_command command
 
 # launch the waypoint node
-ros2 run robot_command waipont
+ros2 run robot_command waypoint
 #+end_src
 
 ** State representation
