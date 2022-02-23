@@ -1,0 +1,16 @@
+ #+TITLE: Goals for 23/02/2022 afternoon
+
+PO: Yves Jordan NJAMEN 
+
+* Expected functionalities
+ - Get presentation ready
+ - Put all the codes together to collect all balls
+ 
+* Tasks for the day
+ - Write the PPT for presentation
+ - Make a blank presentation
+ - Validate the modifications of the robot
+ 
+
+* Technical challenges
+ - control adjustment
