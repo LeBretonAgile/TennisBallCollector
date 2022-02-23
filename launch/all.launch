@@ -1,0 +1,5 @@
+<launch> 
+    <include file="./tennis_court/launch/tennis_court.launch.py" />
+    <include file="./robot_description/launch/display.launch.py" />
+    <include file="./robot_command/launch/robot_command.launch.py" />
+</launch>
