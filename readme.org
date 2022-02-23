@@ -103,6 +103,10 @@ Consulter le [README](tennis_court/README.md) du package pour plus d'information
 ** =robot_description= package
 
 ** =robot_command= package
+The `robot_description` folder is an ROS package containing all the control scripts, here they are:
+- the image processing that locates the robot and the balls.
+- the robot control and the state machine.
+- The waypoints for the robot path.
 
 ** Documents
 The =docs= folder contains all of the useful documents for the project:
