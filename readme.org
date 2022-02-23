@@ -102,6 +102,8 @@ Consulter le [README](tennis_court/README.md) du package pour plus d'information
 
 ** =robot_description= package
 
+The `robot_description` directory is a ROS package that contains the description of the robot. This package allows to describe the different parts and joints of the robot in the file `/urdf/robot.urdf.xacro`. It also contains the definition of the robot's IMU. 
+
 ** =robot_command= package
 
 ** Documents
