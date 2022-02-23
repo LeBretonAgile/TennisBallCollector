@@ -7,10 +7,7 @@ This is the repository used for the discipline of Ingènierie Système and robot
 ** Requirements
 In order to run the simulation, you'll need to install the following dependencies:
 - [[https://pypi.org/project/imutils/][imutils]]
-
-And install tf_transformations:
-- sudo apt install ros-your_ros2-tf-transformations
-- sudo pip3 install transforms3d
+- [[https://pypi.org/project/transform3d/][transform3d]]
 
 ** Run the simulation
 The execution works in two multiple separate parts.
