@@ -50,9 +50,11 @@ class MyNode(Node):
 		self.ball_publisher = self.create_publisher(Float64MultiArray,"/ball_list",30)
 		self.robot_pos_publisher = self.create_publisher(Pose,"/robot_state",30)
 		self.str_subscriber = self.create_subscription(Image,"/zenith_camera/image_raw",self.callback,30)
+		self.str_subscriber = self.create_subscription(Pose,"/waypoint",self.callback_cible,30)
 		self.targets = np.zeros((10,2))#Dist/Id/x,y
 		self.times = np.zeros(10)
 		self.orientation = 0.
+		self.cible = [-100.,-100.]
 		for i in range(10):
 			self.targets[i,0] = 100 + 100*i
 		self.balls=Float64MultiArray()
@@ -84,7 +86,9 @@ class MyNode(Node):
 			else:
 				self.times[i] =  0
 		
-			
+	def callback_cible(self,msg):
+		self.cible[0] = msg.position.x
+		self.cible[1] = msg.position.y
 	
 	def callback(self,msg):
 		img = np.reshape(np.asarray(msg.data),(msg.height,msg.width,3))
@@ -113,6 +117,9 @@ class MyNode(Node):
 				x = int( -self.targets[i,1]/fact + img.shape[1]*0.5 )
 				y = int( -self.targets[i,0]/fact + img.shape[0]*0.5 )
 				cv2.putText(img,str(i),(x,y),cv2.FONT_HERSHEY_SIMPLEX,1,(50,125,255),2,cv2.LINE_4)
+			x = int( -self.cible[1]/fact + img.shape[1]*0.5 )
+			y = int( -self.cible[0]/fact + img.shape[0]*0.5 )
+			cv2.rectangle(img,(x-10,y-10),(x+10,y+10),(255,0,0),2)
 			
 			fact = (8.0-0.4)*np.tan( 2.2 *0.5)/(0.5*img.shape[1])
 			x = int( -self.pos_rob[1]/fact + img.shape[1]*0.5 )
