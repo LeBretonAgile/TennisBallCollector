@@ -1,0 +1,16 @@
+ #+TITLE: Goals for 23/02/2022
+
+PO: Stephane NGNEPIEPAYE WEMBE
+
+* Expected functionalities
+ - Get an improved clamp
+ - The compass is totaly integrated
+ 
+* Tasks for the day
+ - Improve clamp and test it 
+ - Integration of the compass
+ - Improved command
+ 
+
+* Technical challenges
+ - Have a command which work 
