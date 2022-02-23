@@ -290,7 +290,7 @@
 
 
   <!-- ______________ adding grepper _______________  -->
-  <xacro:gripper_link name="right_gripper_1" l="${body_x*0.65}" thickness="${body_y*0.05}" h="${body_z*0.5}"  color="grey" mass="0.1" inertia_ratio="0.01">
+<!--   <xacro:gripper_link name="right_gripper_1" l="${body_x*0.65}" thickness="${body_y*0.05}" h="${body_z*0.5}"  color="grey" mass="0.1" inertia_ratio="0.01">
     <origin xyz="${body_x*0.3} ${-body_y*0.1} ${-body_z*0.2}" rpy="0 0 ${-pi/8}"/>
   </xacro:gripper_link>
   <xacro:gripper_link name="right_gripper_2" l="${body_x*0.15}" thickness="${body_y*0.05}" h="${body_z*0.5}"  color="grey" mass="0.1" inertia_ratio="0.01">
@@ -301,6 +301,19 @@
   </xacro:gripper_link>
   <xacro:gripper_link name="left_gripper_2" l="${body_x*0.15}" thickness="${body_y*0.05}" h="${body_z*0.5}"  color="grey" mass="0.1" inertia_ratio="0.01">
     <origin xyz="${body_x*0.4*cos(-pi/8)} ${-body_x*0.75*sin(-pi/8)} ${-body_z*0.2}" rpy="0 0 ${-pi/8}"/>
+  </xacro:gripper_link> -->
+
+    <xacro:gripper_link name="right_gripper_1" l="${body_x*0.6}" thickness="${body_y*0.05}" h="${body_z*0.5}"  color="grey" mass="0.1" inertia_ratio="0.01">
+    <origin xyz="${body_x*0.36} ${-body_y*0.05} ${-body_z*0.2}" rpy="0 0 ${-pi/8}"/>
+  </xacro:gripper_link>
+  <xacro:gripper_link name="right_gripper_2" l="${body_x*0.15}" thickness="${body_y*0.05}" h="${body_z*0.5}"  color="grey" mass="0.1" inertia_ratio="0.01">
+    <origin xyz="${body_x*0.46*cos(pi/8)} ${-body_x*0.71*sin(pi/8)} ${-body_z*0.2}" rpy="0 0 ${pi/8}"/>
+  </xacro:gripper_link>
+  <xacro:gripper_link name="left_gripper_1" l="${body_x*0.6}" thickness="${body_y*0.05}" h="${body_z*0.5}"  color="grey" mass="0.1" inertia_ratio="0.01">
+    <origin xyz="${body_x*0.36} ${body_y*0.05} ${-body_z*0.2}" rpy="0 0 ${pi/8}"/>
+  </xacro:gripper_link>
+  <xacro:gripper_link name="left_gripper_2" l="${body_x*0.15}" thickness="${body_y*0.05}" h="${body_z*0.5}"  color="grey" mass="0.1" inertia_ratio="0.01">
+    <origin xyz="${body_x*0.46*cos(-pi/8)} ${-body_x*0.71*sin(-pi/8)} ${-body_z*0.2}" rpy="0 0 ${-pi/8}"/>
   </xacro:gripper_link>
 
   <!-- ______________ adding imu _______________  -->
