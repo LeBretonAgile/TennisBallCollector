@@ -25,16 +25,19 @@ First we launch the simulation world in Gazebo. The robot is spawned in a node w
 
 #+begin_src bash :tangle no :export code :results silent
 # launch the simulation world
-ros2 launch tennis_court tennis_court.launcher.py
+ros2 launch tennis_court tennis_court.launch.py
 
 # launch the robot model
-ros2 launch robot_description display.launcher.py
+ros2 launch robot_description display.launch.py
 
 # launch the top camera node
-ros2 launch robot_command camera_top
+ros2 run robot_command camera_top
 
 # launch the control node
-ros2 launch robot_command command
+ros2 run robot_command command
+
+# launch the waypoint node
+ros2 run robot_command waypoint
 #+end_src
 
 ** State representation
