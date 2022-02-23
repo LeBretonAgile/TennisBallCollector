@@ -42,18 +42,22 @@ class WaypointNode(Node):
         balls = msg.data#multiarray_to_numpy(msg, np.float64, np.float64)
         #print("balls shape:", balls.shape)
         #print("balls data:", balls)
+        wall_up = 15
+        wall_side = 8
+        # x is up/down, y is right/left
 
         max_id = 0
         for i in range(1,10):
-            if balls[20+i]>balls[20+max_id]:
-                max_id = i
-        if balls[max_id] == 0 :
+            if balls[20+i] > balls[20+max_id]:
+                if abs(balls[max_id*2] - wall_up) > 0.6 or abs(balls[max_id*2+1] - wall_side) > 0.6:  # avoid balls too close to the wall
+                    max_id = i
+
+        if balls[max_id] == 0:
             self.waypoint.position.x = -100
             self.waypoint.position.y = -100
         else:
             self.waypoint.position.x = balls[max_id*2]
             self.waypoint.position.y = balls[max_id*2+1]
-        	
 
         self.get_logger().info("Received message with layout, size : " + str(len(balls)))
 
