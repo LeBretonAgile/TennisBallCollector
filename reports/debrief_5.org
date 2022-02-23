@@ -1,0 +1,26 @@
+#+TITLE: Debriefing for 23/02/2022
+
+PO: Stephane NGNEPIEPAYE WEMBE
+
+* Review
+
+Percentage of accomplished tasks: 70%
+
+** What worked
+- Total integration of the compass
+- Command improved
+- We are able to reach the score zone with a ball
+
+** What did not work
+- we are not able to take ball close with a wall
+
+** PO experience
+It was a good experience but need to have managment skills 
+
+** Advice for the next PO
+Keep up with the members of the group throughout the session, so to make sure that everybody is aware of what to be done for progress to happen.
+
+* New decisions
+- Change the strategie : ignore balls close to the wall
+- Continue to improve gripper 
+- And start the presentation.

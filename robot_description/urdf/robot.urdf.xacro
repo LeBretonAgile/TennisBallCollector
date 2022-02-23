@@ -1,17 +1,17 @@
 <?xml version="1.0" ?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="carlos">
 
-   <xacro:property name="body_x" value="0.6" />
-   <xacro:property name="body_y" value="0.4" />
-   <xacro:property name="body_z" value="0.4" />
-   <xacro:property name="body_m" value="0.8" />
+   <xacro:property name="body_x" value="0.5" />
+   <xacro:property name="body_y" value="0.3" />
+   <xacro:property name="body_z" value="0.2" />
+   <xacro:property name="body_m" value="1.0" />
 
-   <xacro:property name="wheel_len" value="0.08" />
-   <xacro:property name="wheel_rad" value="0.18" />
+   <xacro:property name="wheel_len" value="0.04" />
+   <xacro:property name="wheel_rad" value="0.1" />
    <xacro:property name="wheel_m" value="0.1" />
 
-   <xacro:property name="wheel_front_rad" value="0.08" />
-   <xacro:property name="wheel_front_m" value="0.1" />
+   <xacro:property name="wheel_front_rad" value="0.07" />
+   <xacro:property name="wheel_front_m" value="0.2" />
 
    <xacro:property name="cam_rad" value="0.04" />
    <xacro:property name="cam_m" value="0.01" />
@@ -95,6 +95,11 @@
        <child link="${name}"/>
        <xacro:insert_block name="origin"/>
     </joint>
+    <gazebo reference="wheel_front">
+     <material>Gazebo/DarkGray</material>
+     <mu1>0.2</mu1>
+     <mu2>0.2</mu2>
+    </gazebo>
   </xacro:macro>
 
   <material name="blue">
@@ -303,16 +308,16 @@
     <origin xyz="${body_x*0.4*cos(-pi/8)} ${-body_x*0.75*sin(-pi/8)} ${-body_z*0.2}" rpy="0 0 ${-pi/8}"/>
   </xacro:gripper_link> -->
 
-    <xacro:gripper_link name="right_gripper_1" l="${body_x*0.6}" thickness="${body_y*0.05}" h="${body_z*0.5}"  color="grey" mass="0.1" inertia_ratio="0.01">
+  <xacro:gripper_link name="right_gripper_1" l="${body_x*0.6}" thickness="${body_y*0.05}" h="${body_z*0.6}"  color="grey" mass="0.1" inertia_ratio="0.01">
     <origin xyz="${body_x*0.36} ${-body_y*0.05} ${-body_z*0.2}" rpy="0 0 ${-pi/8}"/>
   </xacro:gripper_link>
-  <xacro:gripper_link name="right_gripper_2" l="${body_x*0.15}" thickness="${body_y*0.05}" h="${body_z*0.5}"  color="grey" mass="0.1" inertia_ratio="0.01">
+  <xacro:gripper_link name="right_gripper_2" l="${body_x*0.15}" thickness="${body_y*0.05}" h="${body_z*0.6}"  color="grey" mass="0.02" inertia_ratio="0.01">
     <origin xyz="${body_x*0.46*cos(pi/8)} ${-body_x*0.71*sin(pi/8)} ${-body_z*0.2}" rpy="0 0 ${pi/8}"/>
   </xacro:gripper_link>
-  <xacro:gripper_link name="left_gripper_1" l="${body_x*0.6}" thickness="${body_y*0.05}" h="${body_z*0.5}"  color="grey" mass="0.1" inertia_ratio="0.01">
+  <xacro:gripper_link name="left_gripper_1" l="${body_x*0.6}" thickness="${body_y*0.05}" h="${body_z*0.6}"  color="grey" mass="0.02" inertia_ratio="0.01">
     <origin xyz="${body_x*0.36} ${body_y*0.05} ${-body_z*0.2}" rpy="0 0 ${pi/8}"/>
   </xacro:gripper_link>
-  <xacro:gripper_link name="left_gripper_2" l="${body_x*0.15}" thickness="${body_y*0.05}" h="${body_z*0.5}"  color="grey" mass="0.1" inertia_ratio="0.01">
+  <xacro:gripper_link name="left_gripper_2" l="${body_x*0.15}" thickness="${body_y*0.05}" h="${body_z*0.6}"  color="grey" mass="0.1" inertia_ratio="0.01">
     <origin xyz="${body_x*0.46*cos(-pi/8)} ${-body_x*0.71*sin(-pi/8)} ${-body_z*0.2}" rpy="0 0 ${-pi/8}"/>
   </xacro:gripper_link>
 
