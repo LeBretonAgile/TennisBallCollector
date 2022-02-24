@@ -25,6 +25,9 @@ colcon build --symlink-install
 First we launch the simulation world in Gazebo. The robot is spawned in a node with its description and then the mission is launched.
 
 #+begin_src bash :tangle no :export code :results silent
+# launch all simulation without the command
+ros2 launch ./launch/all.launch
+
 # launch the simulation world
 ros2 launch tennis_court tennis_court.launch.py
 
